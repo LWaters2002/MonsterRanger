@@ -13,6 +13,7 @@ public class FireflyProjectile : MonoBehaviour
 
     [Header("References")]
     public PopupText popupTextPrefab;
+    public ParticleSystem[] particleSystems;
 
     private Rigidbody _rigidbody;
     private Transform _target;
@@ -22,6 +23,8 @@ public class FireflyProjectile : MonoBehaviour
     public UnityEvent OnHit;
 
     private bool _hasHit = false;
+
+    private Material _material;
 
     public void Init(Transform target, HealInfo healInfo)
     {
@@ -33,12 +36,35 @@ public class FireflyProjectile : MonoBehaviour
 
         _rigidbody = GetComponent<Rigidbody>();
 
+        CacheMaterial();
+        SetInfusionColour();
+
         StartCoroutine("Travel"); ;
+    }
+
+    private void CacheMaterial()
+    {
+        Renderer renderer = GetComponentInChildren<Renderer>();
+        _material = new Material(renderer.materials[1]);
+
+    }
+
+    private void SetInfusionColour()
+    {
+        var colour = HealHelper.InfusionLookup[((int)_healInfo.infusion)];
+        
+        foreach (ParticleSystem particleSystem in particleSystems)
+        {
+            var main = particleSystem.main;
+            main.startColor = colour;
+        }
+
+        _material.SetColor("_EmissionColor", colour);
     }
 
     IEnumerator Travel()
     {
-        Vector2 randDirection = Random.insideUnitCircle.normalized * Random.Range(.7f,1.1f);
+        Vector2 randDirection = Random.insideUnitCircle.normalized * Random.Range(.7f, 1.1f);
 
         Vector3 spreadDirection = (transform.right * randDirection.x + transform.up * randDirection.y).normalized;
         _rigidbody.AddForce(spreadDirection * _spreadForce, ForceMode.VelocityChange);

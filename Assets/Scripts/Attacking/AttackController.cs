@@ -22,8 +22,8 @@ public class AttackController : MonoBehaviour
         return _attack;
     }
 
-    public void Attack()
+    public void Attack(int attackStep)
     {
-        _attack?.Attack();
+        _attack?.Attack(attackStep);
     }
 }

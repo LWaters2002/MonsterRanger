@@ -69,6 +69,10 @@ MonoBehaviour:
   _spreadForce: 6
   popupTextPrefab: {fileID: 1563572095816580365, guid: 5ba2134a1dc698c4c937cf188f30b9a7,
     type: 3}
+  particleSystems:
+  - {fileID: 4832882719180366011}
+  - {fileID: 8679488944152562770}
+  - {fileID: 8446618355698411302}
   OnHit:
     m_PersistentCalls:
       m_Calls:
