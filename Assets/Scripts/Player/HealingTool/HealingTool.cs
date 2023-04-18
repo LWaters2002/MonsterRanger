@@ -12,6 +12,7 @@ public class HealingTool : MonoBehaviour
     public float range;
     public float staminaCost;
     public float healAmount;
+    public Vector2Int FireflyCountRange;
     public float maxHealMultiplier;
 
     [Header("Charging")]
@@ -29,19 +30,12 @@ public class HealingTool : MonoBehaviour
     [Header("ScreenShake")]
     public Cinemachine.CinemachineImpulseSource impulseSource;
 
-    [Header("Fire Particles")]
-    public ParticleSystem beamParticle;
-    public ParticleSystem attractedParticle;
-    public float attractionForce;
-
     public UnityEvent OnFire;
 
     private Coroutine chargeCoroutine;
     private bool _isPressed;
     private bool _isCharging;
     private bool _isMaxCharge;
-
-    private GameObject _attractor;
 
     public System.Action<bool> OnCharge;
     public StatModifier speedModifier;
@@ -116,13 +110,7 @@ public class HealingTool : MonoBehaviour
     private void MinCharge()
     {
         var main = chargeParticles.main;
-        var beamMain = beamParticle.main;
-
-        beamMain.startColor = Color.white;
         main.startColor = Color.white;
-
-        var attractedMain = attractedParticle.main;
-        attractedMain.startColor = Color.white;
 
         _isMaxCharge = false;
     }
@@ -131,12 +119,6 @@ public class HealingTool : MonoBehaviour
     {
         var main = chargeParticles.main;
         main.startColor = maxChargeColour;
-
-        var beamMain = beamParticle.main;
-        beamMain.startColor = maxChargeColour;
-
-        var attractedMain = attractedParticle.main;
-        attractedMain.startColor = maxChargeColour;
 
         _isMaxCharge = true;
     }
@@ -148,9 +130,6 @@ public class HealingTool : MonoBehaviour
 
         var emission = chargeParticles.emission;
         emission.rateOverTime = percent * maxEmissionRate;
-
-        var attractedEmission = attractedParticle.emission;
-        attractedEmission.rateOverTime = (percent + .2f) * maxEmissionRate;
 
         var chargeMain = chargeParticles.main;
 
@@ -175,42 +154,33 @@ public class HealingTool : MonoBehaviour
 
         if (Physics.Raycast(Player.orientation.position, Player.orientation.forward, out RaycastHit hit, range, mask))
         {
-
-            // if (_attractor) Destroy(_attractor);
-
-            _attractor = new GameObject("Particle Target");
-            _attractor.transform.position = hit.point;
-            _attractor.transform.parent = hit.collider.gameObject.transform;
-
-            var forceField = _attractor.AddComponent<ParticleSystemForceField>();
-            forceField.endRange = 200.0f;
-            forceField.gravity = 2f;
-            forceField.drag = 200f;
-
-            // _attractor.AddComponent<Lifetime>().SetLifetime(3f);
-
             HealInfo tempInfo;
             tempInfo.amount = Mathf.Round(healAmount * percent) * ((_isMaxCharge) ? maxHealMultiplier : 1f);
             tempInfo.infusion = E_Infusion.None;
 
-            SpawnFireflyProjectiles(percent, _attractor.transform, tempInfo);
-
-            IHealable healable = hit.collider.GetComponentInParent<IHealable>();
-
-            if (healable != null)
-            {
-                healable.Heal(tempInfo);
-            }
-
-            Debug.DrawLine(Player.orientation.position, hit.point, Color.red, 2f);
+            Transform target = SpawnTarget(hit);
+            SpawnFireflyProjectiles(percent, target, tempInfo);
         }
+    }
 
+    private Transform SpawnTarget(RaycastHit hit)
+    {
+        GameObject target = new GameObject("Particle Target");
+        target.transform.position = hit.point;
+        target.transform.parent = hit.collider.gameObject.transform;
+
+        Lifetime lifetime = target.AddComponent<Lifetime>();
+        lifetime.SetLifetime(10.0f);
+
+        return target.transform;
     }
 
     private void SpawnFireflyProjectiles(float percent, Transform target, HealInfo healInfo)
     {
 
-        for (int i = 0; i < 5; i++)
+        int count = Mathf.RoundToInt(Mathf.Lerp(FireflyCountRange.x, FireflyCountRange.y, percent));
+
+        for (int i = 0; i < count; i++)
         {
             FireflyProjectile projectile = Instantiate(fireflyPrefab, transform.position, transform.rotation);
             projectile.Init(target, healInfo);

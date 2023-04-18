@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class LookAtCamera : MonoBehaviour
 {
-	public Transform camTransform;
+    private Transform _camTransform;
 
-	Quaternion originalRotation;
+    Quaternion originalRotation;
 
     void Start()
     {
         originalRotation = transform.rotation;
+        _camTransform = Camera.main.transform;
     }
 
     void Update()
     {
-     	transform.rotation = camTransform.rotation * originalRotation;   
+        transform.rotation = _camTransform.rotation * originalRotation;
     }
 }
