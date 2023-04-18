@@ -72,10 +72,13 @@ public class FireflyProjectile : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out IHealable healable))
+        IHealable healable = other.GetComponentInParent<IHealable>();
+
+        if (healable != null)
         {
             healable.Heal(_healInfo);
             Destroy(gameObject);
         }
+
     }
 }
