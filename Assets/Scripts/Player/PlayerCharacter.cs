@@ -10,7 +10,7 @@ public class PlayerCharacter : Pawn, IDamagable
     public Rigidbody rb { get; private set; }
     public Animator animator { get; private set; }
     public PlayerInteractor interactor { get; private set; }
-    public PlayerStats playerStats { get; private set; }
+    public PlayerStats stats { get; private set; }
 
     [field: SerializeField]
     public HealingTool healingTool { get; private set; }
@@ -38,7 +38,7 @@ public class PlayerCharacter : Pawn, IDamagable
         animator = GetComponent<Animator>();
         interactor = GetComponent<PlayerInteractor>();
 
-        playerStats = new PlayerStats(this, 100, 100, 100);
+        stats = new PlayerStats(this, 100, 100, 100);
 
         InitChain();
     }
@@ -102,6 +102,7 @@ public class PlayerCharacter : Pawn, IDamagable
 
     public void TakeDamage(Damage damage)
     {
-        playerStats.AlterHealth(damage.amount);
+        stats.AlterHealth(damage.amount);
     }
+    
 }

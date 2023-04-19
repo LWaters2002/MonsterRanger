@@ -36,9 +36,7 @@ public class Hitbox : MonoBehaviour, IMarkable, IHealable
         }
 
         OnHeal?.Invoke(partName, _healAmount, healRequired);
-
-        Debug.Log(partName + " Healed for : " + healInfo.amount + "\n" + "Type : " + healInfo.infusion);
-
+        
         return true;
     }
 

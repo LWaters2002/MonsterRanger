@@ -26,7 +26,7 @@ public class Hurtbox : MonoBehaviour
         PlayerCharacter player = other.GetComponentInParent<PlayerCharacter>();
         if (!player) return;
 
-        player.playerStats.AlterHealth(-damage);
+        player.stats.AlterHealth(-damage);
 
         //Knockback
         Vector3 knockbackDirection = (-other.transform.position + transform.position).normalized;

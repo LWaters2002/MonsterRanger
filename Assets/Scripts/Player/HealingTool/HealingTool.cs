@@ -43,7 +43,6 @@ public class HealingTool : MonoBehaviour
     public void Init(PlayerCharacter player)
     {
         Player = player;
-        Player.movement.OnDash += CancelHeal;
         InvokeRepeating("ScreenShake", 0f, .225f);
     }
 
@@ -92,7 +91,7 @@ public class HealingTool : MonoBehaviour
 
             impulseSource.m_ImpulseDefinition.m_AmplitudeGain = 0.12f * percent;
 
-            bool isStamina = Player.playerStats.ConsumeStamina(staminaCost * Time.deltaTime);
+            bool isStamina = Player.stats.ConsumeStamina(staminaCost * Time.deltaTime);
 
             //If stamina or no button do a minimum charge shot
             if ((!_isPressed || !isStamina) && _timeCharged > minimumChargeTime) _isCharging = false;

@@ -16,6 +16,7 @@ public class PlayerStats
     private PlayerCharacter _player;
 
     public System.Action<float, float> OnHealthChange;
+    public System.Action<float> OnDamaged;
     public System.Action<float, float> OnStaminaChange;
     public System.Action<float, float> OnExperienceChange;
 
@@ -38,11 +39,14 @@ public class PlayerStats
 
     public void AlterHealth(float amount)
     {
+        if (amount < 0) OnDamaged?.Invoke(amount);
+
         _health += amount;
+
         _health = Mathf.Clamp(_health, 0f, _maxHealth);
-        OnHealthChange.Invoke(_health, _maxHealth);
-        if (_health <= 0f) { OnDeath.Invoke(); }
-    }
+        OnHealthChange?.Invoke(_health, _maxHealth);
+        if (_health <= 0f) { OnDeath?.Invoke(); }
+    }   
 
     IEnumerator RegenStamina()
     {
@@ -61,9 +65,9 @@ public class PlayerStats
         if (_regenCoroutine != null) _player.StopCoroutine(_regenCoroutine);
 
         _regenCoroutine = _player.StartCoroutine(RegenStamina());
-        
+
         AlterStamina(-amount);
-        
+
         return true;
     }
 

@@ -15,7 +15,7 @@ public class HUD : UI
 
     public void Init(PlayerCharacter playerCharacter)
     {
-        _playerStats = playerCharacter.playerStats;
+        _playerStats = playerCharacter.stats;
 
         healthBar.fillAmount = 1f;
         staminaBar.fillAmount = 1f;

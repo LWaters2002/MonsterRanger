@@ -52,7 +52,7 @@ public class FireflyProjectile : MonoBehaviour
     private void SetInfusionColour()
     {
         var colour = HealHelper.InfusionLookup[((int)_healInfo.infusion)];
-        
+
         foreach (ParticleSystem particleSystem in particleSystems)
         {
             var main = particleSystem.main;
@@ -111,7 +111,10 @@ public class FireflyProjectile : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (_hasHit) return;
+
         IHealable healable = other.GetComponentInParent<IHealable>();
+
+        if (other.gameObject.layer == 6) { Destroy(gameObject); }
 
         if (healable != null)
         {

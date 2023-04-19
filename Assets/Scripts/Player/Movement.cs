@@ -61,6 +61,9 @@ public class Movement : MonoBehaviour
     [Header("Dashing")]
     public float dashCost;
     public float dashForce;
+    public float dashCooldown;
+
+    private float _dashTimer; 
 
     //Private settings
     private float _speed;
@@ -72,7 +75,7 @@ public class Movement : MonoBehaviour
     private float _velocityMagnitude;
 
     private System.Action<Movestate> OnStateChange;
-    public System.Action OnDash;
+    public System.Action<float> OnDash; //Cooldown
 
     private Stat _externalMultiplier;
 
@@ -99,6 +102,26 @@ public class Movement : MonoBehaviour
         }
     }
 
+    public void AddMovementMultiplier(StatModifier modifier, float duration = -1)
+    {
+        if (duration <= 0)
+        {
+            _externalMultiplier.AddModifier(modifier);
+            return;
+        }
+
+        StartCoroutine(AddAndRemoveMovementMultiplierStatModifier(modifier, duration));
+    }
+
+    private IEnumerator AddAndRemoveMovementMultiplierStatModifier(StatModifier modifier, float duration)
+    {
+        _externalMultiplier.AddModifier(modifier);
+
+        yield return new WaitForSeconds(duration);
+
+        _externalMultiplier.RemoveModifier(modifier);
+    }
+
     public void BindControls(Controls controls)
     {
         controls.Gameplay.Move.performed += SetMovementInfo;
@@ -110,15 +133,19 @@ public class Movement : MonoBehaviour
 
     private void Dash(InputAction.CallbackContext ctx)
     {
-        if (!_player.playerStats.ConsumeStamina(dashCost)) return;
+        if (_dashTimer < dashCooldown) return;
+        if (!_player.stats.ConsumeStamina(dashCost)) return;
+
+        _dashTimer = 0;
 
         Vector3 moveDirection = _moveIn.y * transform.forward + _moveIn.x * transform.right;
         moveDirection = moveDirection.normalized;
 
         _player.rb.AddForce(moveDirection * dashForce, ForceMode.VelocityChange);
-        onClimbJump?.Invoke();
-        OnDash?.Invoke();
+        OnDash?.Invoke(dashCooldown);
     }
+
+
 
     private void FixedUpdate()
     {
@@ -131,17 +158,18 @@ public class Movement : MonoBehaviour
         ApplyMovement();
 
         CheckWallClimb();
-
-        _velocityMagnitude = _player.rb.velocity.magnitude; //For debugging :D
     }
 
     private void Update()
     {
+        if (_dashTimer < dashCooldown) _dashTimer += Time.deltaTime;
+
         if (!_isSprinting) return;
-        if (!_player.playerStats.ConsumeStamina(sprintCost * Time.deltaTime))
+        if (!_player.stats.ConsumeStamina(sprintCost * Time.deltaTime))
         {
             _isSprinting = false;
         }
+
     }
 
     private void ApplyGravity()
@@ -249,7 +277,7 @@ public class Movement : MonoBehaviour
     {
         if (movestate == Movestate.aerial || movestate == Movestate.none) return;
 
-        if (!_player.playerStats.ConsumeStamina(jumpCost)) return;
+        if (!_player.stats.ConsumeStamina(jumpCost)) return;
 
         Vector3 jumpDirectionalForce = Vector3.zero;
 
