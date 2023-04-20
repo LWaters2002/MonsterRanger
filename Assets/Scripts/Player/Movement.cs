@@ -126,13 +126,17 @@ public class Movement : MonoBehaviour
     {
         controls.Gameplay.Move.performed += SetMovementInfo;
         controls.Gameplay.Dash.performed += Dash;
+        controls.Gameplay.Dash.canceled += StopSprint;
         controls.Gameplay.Jump.performed += Jump;
+    }
+
+    private void StopSprint(InputAction.CallbackContext obj)
+    {
+        _isSprinting = false;
     }
 
     private void Dash(InputAction.CallbackContext ctx)
     {
-        if (ctx.ReadValue<float>() < .5f) { _isSprinting = false; ; }
-
         //Cursed
         string interactionType = ctx.interaction.ToString();
         interactionType = interactionType.Substring(37);

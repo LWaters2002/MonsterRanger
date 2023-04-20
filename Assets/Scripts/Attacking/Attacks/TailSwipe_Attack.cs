@@ -23,7 +23,6 @@ public class TailSwipe_Attack : AttackComponent
         }
     }
 
-
     public override float CalculateEffectiveness()
     {
         return 1.0f;

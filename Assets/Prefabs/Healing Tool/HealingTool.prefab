@@ -173,7 +173,7 @@ MonoBehaviour:
   range: 100
   staminaCost: 5
   healAmount: 15
-  FireflyCountRange: {x: 0, y: 6}
+  FireflyCountRange: {x: 0, y: 5}
   maxHealMultiplier: 1.5
   chargeTime: 3
   minimumChargeTime: 1

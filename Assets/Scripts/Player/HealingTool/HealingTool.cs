@@ -191,7 +191,7 @@ public class HealingTool : MonoBehaviour
         {
             FireflyProjectile projectile = Instantiate(fireflyPrefab, transform.position, transform.rotation);
             projectile.Init(target, healInfo);
-            yield return new WaitForSeconds(Random.Range(0, .05f));
+            yield return null;
         }
     }
 

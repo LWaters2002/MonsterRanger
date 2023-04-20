@@ -8,6 +8,18 @@ public class AttackComponent : MonoBehaviour
     public string attackName;
     public UnityEvent OnAttack;
 
+    private Animator _animator;
+
+    private void Start()
+    {
+        _animator = GetComponentInParent<Animator>();
+    }
+
+    public virtual void StartAttack()
+    {
+        _animator.CrossFade(attackName, .25f);
+    }
+
     public virtual void Attack(int attackStep)
     {
         Debug.Log("Fired Attack : " + attackName);
