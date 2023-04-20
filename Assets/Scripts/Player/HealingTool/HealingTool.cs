@@ -7,6 +7,7 @@ public class HealingTool : MonoBehaviour
     public PlayerCharacter Player { get; private set; }
     public FireflyProjectile fireflyPrefab;
     public LayerMask mask;
+    public AudioSource chargeSound;
 
     [Header("Stats")]
     public float range;
@@ -74,6 +75,7 @@ public class HealingTool : MonoBehaviour
 
         _timeCharged = 0.0f;
         chargeParticles.Play();
+        chargeSound.Play();
 
         MinCharge();
 
@@ -88,6 +90,7 @@ public class HealingTool : MonoBehaviour
             percent = Mathf.Clamp01(percent);
 
             ScaleParticlesToCharge(percent);
+            AdjustChargeEffectVolume(percent);
 
             impulseSource.m_ImpulseDefinition.m_AmplitudeGain = 0.12f * percent;
 
@@ -144,6 +147,11 @@ public class HealingTool : MonoBehaviour
         chargeMain.startColor = Color.HSVToRGB(h, s * percent, v);
     }
 
+    private void AdjustChargeEffectVolume(float percent)
+    {
+        chargeSound.volume = percent * 0.2f;
+    }
+
     public void HealCast(float percent)
     {
         if (!Player) return;
@@ -158,7 +166,7 @@ public class HealingTool : MonoBehaviour
             tempInfo.infusion = E_Infusion.None;
 
             Transform target = SpawnTarget(hit);
-            SpawnFireflyProjectiles(percent, target, tempInfo);
+            StartCoroutine(SpawnFireflyProjectiles(percent, target, tempInfo));
         }
     }
 
@@ -174,7 +182,7 @@ public class HealingTool : MonoBehaviour
         return target.transform;
     }
 
-    private void SpawnFireflyProjectiles(float percent, Transform target, HealInfo healInfo)
+    private IEnumerator SpawnFireflyProjectiles(float percent, Transform target, HealInfo healInfo)
     {
 
         int count = Mathf.RoundToInt(Mathf.Lerp(FireflyCountRange.x, FireflyCountRange.y, percent));
@@ -183,6 +191,7 @@ public class HealingTool : MonoBehaviour
         {
             FireflyProjectile projectile = Instantiate(fireflyPrefab, transform.position, transform.rotation);
             projectile.Init(target, healInfo);
+            yield return new WaitForSeconds(Random.Range(0, .05f));
         }
     }
 
@@ -192,6 +201,7 @@ public class HealingTool : MonoBehaviour
 
         _isCharging = false;
         chargeParticles.Stop();
+        chargeSound.Stop();
 
         OnCharge?.Invoke(false);
     }

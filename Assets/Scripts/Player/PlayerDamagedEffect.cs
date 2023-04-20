@@ -53,7 +53,7 @@ public class PlayerDamagedEffect : MonoBehaviour
 
     private void RecieveDamage(float damageAmount)
     {
-        impulseSource.GenerateImpulse();
+        impulseSource.GenerateImpulse(.1f);
         StartCoroutine(AlterFloatParameterForDuration(vignette.intensity, vignetteIntensity, vignetteDuration, vignetteCurve));
         playerCharacter.movement.AddMovementMultiplier(movementDebuff, debuffDuration);
     }
