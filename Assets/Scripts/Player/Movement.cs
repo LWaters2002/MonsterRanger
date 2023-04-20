@@ -63,7 +63,7 @@ public class Movement : MonoBehaviour
     public float dashForce;
     public float dashCooldown;
 
-    private float _dashTimer; 
+    private float _dashTimer;
 
     //Private settings
     private float _speed;
@@ -127,25 +127,35 @@ public class Movement : MonoBehaviour
         controls.Gameplay.Move.performed += SetMovementInfo;
         controls.Gameplay.Dash.performed += Dash;
         controls.Gameplay.Jump.performed += Jump;
-        controls.Gameplay.Sprint.performed += _ => _isSprinting = true;
-        controls.Gameplay.Sprint.canceled += _ => _isSprinting = false;
     }
 
     private void Dash(InputAction.CallbackContext ctx)
     {
-        if (_dashTimer < dashCooldown) return;
-        if (!_player.stats.ConsumeStamina(dashCost)) return;
+        if (ctx.ReadValue<float>() < .5f) { _isSprinting = false; ; }
 
-        _dashTimer = 0;
+        //Cursed
+        string interactionType = ctx.interaction.ToString();
+        interactionType = interactionType.Substring(37);
 
-        Vector3 moveDirection = _moveIn.y * transform.forward + _moveIn.x * transform.right;
-        moveDirection = moveDirection.normalized;
+        if (interactionType == "TapInteraction")
+        {
+            if (_dashTimer < dashCooldown) return;
+            if (!_player.stats.ConsumeStamina(dashCost)) return;
 
-        _player.rb.AddForce(moveDirection * dashForce, ForceMode.VelocityChange);
-        OnDash?.Invoke(dashCooldown);
+            _dashTimer = 0;
+
+            Vector3 moveDirection = _moveIn.y * transform.forward + _moveIn.x * transform.right;
+            moveDirection = moveDirection.normalized;
+
+            _player.rb.AddForce(moveDirection * dashForce, ForceMode.VelocityChange);
+            OnDash?.Invoke(dashCooldown);
+        }
+        else if (interactionType == "HoldInteraction")
+        {
+            _isSprinting = true;
+        }
+        
     }
-
-
 
     private void FixedUpdate()
     {

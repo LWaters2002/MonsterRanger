@@ -205,8 +205,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""06f9fbcd-b6fd-404d-93e5-b20677d7ceeb"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": ""Tap,Hold(duration=0.2)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Dash"",

@@ -17799,7 +17799,7 @@ PrefabInstance:
     - target: {fileID: 5146110896228408709, guid: fb8c2ee88e4225f45853cde8fb03a27b,
         type: 3}
       propertyPath: walkSpeed
-      value: 12
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5146110896228408709, guid: fb8c2ee88e4225f45853cde8fb03a27b,
         type: 3}
@@ -17809,7 +17809,7 @@ PrefabInstance:
     - target: {fileID: 5146110896228408709, guid: fb8c2ee88e4225f45853cde8fb03a27b,
         type: 3}
       propertyPath: sprintMultiplier
-      value: 1.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5146110896228408709, guid: fb8c2ee88e4225f45853cde8fb03a27b,
         type: 3}
