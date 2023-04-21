@@ -389,7 +389,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5283437470714241251
 GameObject:
@@ -10188,6 +10188,31 @@ PrefabInstance:
         type: 3}
       propertyPath: looping
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1960770999945190431, guid: 6e35925ba2b9d284ba4cb6d9ca8dc3ac,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1960770999945190431, guid: 6e35925ba2b9d284ba4cb6d9ca8dc3ac,
+        type: 3}
+      propertyPath: InitialModule.gravityModifier.scalar
+      value: -0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1960770999945190431, guid: 6e35925ba2b9d284ba4cb6d9ca8dc3ac,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.minMaxState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1960770999945190431, guid: 6e35925ba2b9d284ba4cb6d9ca8dc3ac,
+        type: 3}
+      propertyPath: InitialModule.gravityModifier.minScalar
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 1960770999945190431, guid: 6e35925ba2b9d284ba4cb6d9ca8dc3ac,
+        type: 3}
+      propertyPath: InitialModule.gravityModifier.minMaxState
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

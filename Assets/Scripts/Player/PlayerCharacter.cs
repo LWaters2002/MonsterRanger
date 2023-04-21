@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,7 +41,14 @@ public class PlayerCharacter : Pawn, IDamagable
 
         stats = new PlayerStats(this, 100, 100, 100);
 
+        movement.OnDash += PlayDashAnimation;
+        
         InitChain();
+    }
+
+    private void PlayDashAnimation(float obj)
+    {
+        animator.CrossFade("Dash", .1f);
     }
 
     private void InitChain()
@@ -104,5 +112,5 @@ public class PlayerCharacter : Pawn, IDamagable
     {
         stats.AlterHealth(damage.amount);
     }
-    
+
 }
