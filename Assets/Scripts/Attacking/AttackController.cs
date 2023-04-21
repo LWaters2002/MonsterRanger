@@ -10,13 +10,18 @@ public class AttackController : MonoBehaviour
     private AttackComponent _attack;
     private AttackComponent[] _attacks;
 
-    public void Init()
-    {
-        _attacks = GetComponentsInChildren<AttackComponent>();
-    }
+    private Entity _entity;
 
-    private void Start()
+    public void Init(Entity entity)
     {
+        _entity = entity;
+        _attacks = GetComponentsInChildren<AttackComponent>();
+
+        foreach (AttackComponent attack in _attacks)
+        {
+            attack.Init(_entity);
+        }
+
         _attack.StartAttack();
     }
 

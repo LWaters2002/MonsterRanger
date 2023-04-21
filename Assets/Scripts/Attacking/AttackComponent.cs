@@ -8,16 +8,16 @@ public class AttackComponent : MonoBehaviour
     public string attackName;
     public UnityEvent OnAttack;
 
-    private Animator _animator;
+    private Entity _entity;
 
-    private void Start()
+    public void Init(Entity entity)
     {
-        _animator = GetComponentInParent<Animator>();
+        _entity = entity;
     }
 
     public virtual void StartAttack()
     {
-        _animator.CrossFade(attackName, .25f);
+        _entity.animator.CrossFade(attackName, .25f);
     }
 
     public virtual void Attack(int attackStep)

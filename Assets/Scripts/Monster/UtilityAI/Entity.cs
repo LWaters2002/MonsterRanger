@@ -4,15 +4,16 @@ using UnityEngine;
 using UtilAI;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(AttackController))]
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(NavMeshAgent))]
 public class Entity : MonoBehaviour, IDetectable
 {
-    public UtilityAI utilityAI { get; private set; }
-    public FSM fsm { get; private set; }
+
     public NavMeshAgent agent { get; private set; }
     public Animator animator { get; private set; }
     public EntityBlackboard blackboard { get; private set; }
-
-    public Transform mouth;
+    public AttackController attackController { get; private set; }
 
     public System.Action ArrivedAtLocation;
 
@@ -20,14 +21,10 @@ public class Entity : MonoBehaviour, IDetectable
 
     protected virtual void Start()
     {
-        utilityAI = GetComponent<UtilityAI>();
-        fsm = new FSM(new Dictionary<System.Type, State>(), null);
-        agent = GetComponent<NavMeshAgent>();
-        blackboard = GetComponent<EntityBlackboard>();
         animator = GetComponent<Animator>();
+        attackController = GetComponent<AttackController>();
 
-        fsm.Init(this);
-        utilityAI.Init(this);
+        attackController.Init(this);
     }
 
     public virtual void GoToLocation(Vector3 location)

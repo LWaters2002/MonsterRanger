@@ -8,6 +8,7 @@ public class StompAttack_Gallant : AttackComponent
     public int projectileCount;
     public float radius;
     public float projectileDamage;
+    public AudioSource launchSound;
 
     private List<EnemyProjectile> _projectiles;
 
@@ -18,13 +19,13 @@ public class StompAttack_Gallant : AttackComponent
         switch (attackStep)
         {
             case 0:
-                GenerateProjectiles();
+                StartCoroutine(GenerateProjectiles());
                 break;
             case 1:
                 ChargeProjectiles();
                 break;
             case 2:
-                ShootAtPlayer();
+                StartCoroutine(ShootAtPlayer());
                 break;
         }
     }
@@ -41,20 +42,35 @@ public class StompAttack_Gallant : AttackComponent
             Vector3 target = transform.position + GetPositionGivenRadius(angle, radius);
             _projectiles[i - 1].SetTarget(target, 1f);
         }
+
+        float t = 0;
+
+        while (t < .7f)
+        {
+            t += Time.deltaTime;
+
+            foreach (EnemyProjectile projectile in _projectiles)
+            {
+                projectile.transform.localScale = Vector3.one * (1 + t);
+            }
+        }
     }
 
-    private void ShootAtPlayer()
+    private IEnumerator ShootAtPlayer()
     {
+        launchSound.Play();
+        
         GameObject target = FindObjectOfType<PlayerCharacter>().gameObject;
 
         foreach (EnemyProjectile projectile in _projectiles)
         {
             projectile.SetState(ProjectileState.Physics);
-            projectile.LaunchAtTarget(target.transform.position, 50f);
+            projectile.LaunchAtTarget(target.transform.position, 30f);
+            yield return new WaitForSeconds(.8f / projectileCount);
         }
     }
 
-    private void GenerateProjectiles()
+    private IEnumerator GenerateProjectiles()
     {
         float segment = Mathf.PI / projectileCount;
         const float offset = -Mathf.PI / 2;
@@ -70,6 +86,8 @@ public class StompAttack_Gallant : AttackComponent
             projectile.Init(projectileDamage, target);
 
             _projectiles.Add(projectile);
+            yield return new WaitForSeconds(.8f / projectileCount);
+
         }
     }
 

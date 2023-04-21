@@ -34,7 +34,6 @@ namespace UtilAI
                 {
                     foodFound = true;
                     _consumables += 1;
-                    source.Consume(entity.mouth);
                     source.OnConsume += FoodConsumed;
                 }
             }

@@ -1645,6 +1645,8 @@ GameObject:
   - component: {fileID: 5305935574982256075}
   - component: {fileID: 2252455808175521715}
   - component: {fileID: 1334643404}
+  - component: {fileID: 187800828511050251}
+  - component: {fileID: 7736034812487116600}
   m_Layer: 10
   m_Name: Gallant
   m_TagString: Untagged
@@ -1718,6 +1720,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attack: {fileID: 284113536}
+--- !u!114 &187800828511050251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443830510196450571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4f426eb2a6a12d41bd7f87786a815e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  water: 0
+  maxWater: 0
+  waterDecayRate: 0
+  hunger: 0
+  maxHunger: 0
+  hungerDecayRate: 0
+  sleepiness: 0
+  maxSleepiness: 0
+  waterAreas: []
+  foodAreas: []
+  maxTravelDistance: 0
+--- !u!114 &7736034812487116600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443830510196450571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6baa88d925246d04f80530db5598765c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouth: {fileID: 0}
 --- !u!1 &1522532309890018206
 GameObject:
   m_ObjectHideFlags: 0
