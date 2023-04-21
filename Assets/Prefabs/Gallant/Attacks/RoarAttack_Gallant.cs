@@ -6,6 +6,10 @@ public class RoarAttack_Gallant : AttackComponent
 {
     public float roarRadius;
     public GameObject aura;
+    public GameObject roar;
+
+    public AudioSource absorbSound;
+    public AudioSource roarSound;
 
     public float pullStrength;
     public float repelStrength;
@@ -50,6 +54,7 @@ public class RoarAttack_Gallant : AttackComponent
 
     public IEnumerator PullRigidbodies()
     {
+        absorbSound.Play();
         Collider[] colliders = Physics.OverlapSphere(transform.position, roarRadius, ~0);
         _rigidbodiesInRadius = new List<Rigidbody>();
 
@@ -86,11 +91,24 @@ public class RoarAttack_Gallant : AttackComponent
         float t = 0f;
         float length = .5f;
 
+        roar.SetActive(true);
+        roarSound.Play();
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, roarRadius, ~0);
+        _rigidbodiesInRadius = new List<Rigidbody>();
+
+        foreach (Collider col in colliders)
+        {
+            if (!col.attachedRigidbody) continue;
+            _rigidbodiesInRadius.Add(col.attachedRigidbody);
+        }
+
         while (t < length)
         {
             t += Time.fixedDeltaTime;
 
             float percent = t / length;
+            roar.transform.localScale = Vector3.Lerp(Vector3.one, Vector3.one * roarRadius, percent);
 
             foreach (Rigidbody rigidbody in _rigidbodiesInRadius)
             {
@@ -100,5 +118,8 @@ public class RoarAttack_Gallant : AttackComponent
 
             yield return new WaitForFixedUpdate();
         }
+
+        roar.SetActive(false);
+
     }
 }
