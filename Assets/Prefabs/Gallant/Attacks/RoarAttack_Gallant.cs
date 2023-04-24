@@ -27,10 +27,8 @@ public class RoarAttack_Gallant : AttackComponent
         switch (attackStep)
         {
             case 0:
-                StartCoroutine(GrowAura());
                 break;
             case 1:
-                StartCoroutine(PullRigidbodies());
                 break;
             case 2:
                 StartCoroutine(RepelRigidbodies());

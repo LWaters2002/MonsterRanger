@@ -22,7 +22,12 @@ public class AttackController : MonoBehaviour
             attack.Init(_entity);
         }
 
-        _attack.StartAttack();
+        Invoke("DelayStart", 2f);
+    }
+
+    private void DelayStart()
+    {
+        _attack.StartAttack();                       
     }
 
     public bool SelectAttack(System.Type type)
