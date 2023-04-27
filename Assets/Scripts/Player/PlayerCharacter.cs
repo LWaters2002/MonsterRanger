@@ -5,7 +5,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Movement))]
-public class PlayerCharacter : Pawn, IDamagable
+public class PlayerCharacter : Pawn, IDamagable, IDetectable
 {
     public Movement movement { get; private set; }
     public Rigidbody rb { get; private set; }

@@ -20,7 +20,9 @@ public class Entity : MonoBehaviour, IDetectable
     {
         animator = GetComponent<Animator>();
         attackController = GetComponent<AttackController>();
+        blackboard = GetComponent<EntityBlackboard>();
 
+        blackboard.Init();
         attackController.Init(this);
     }
 

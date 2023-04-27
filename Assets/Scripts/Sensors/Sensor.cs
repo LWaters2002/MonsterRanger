@@ -9,17 +9,21 @@ public class Sensor : MonoBehaviour
     public System.Action<IDetectable> OnDetectEnter;
     public System.Action<IDetectable> OnDetectLeave;
 
-    public HashSet<IDetectable> _detectables { get; protected set; }
+    public List<IDetectable> _detectables { get; protected set; }
 
-    public void Init()
+    public bool showDebug;
+
+    public virtual void Init()
     {
-        _detectables = new HashSet<IDetectable>();
+        _detectables = new List<IDetectable>();
     }
 
     protected virtual void OnTriggerEnter(Collider other)
     {
+
         IDetectable detectable = other.GetComponentInParent<IDetectable>();
 
+        if (detectable == null) return;
         if (_detectables.Contains(detectable)) return;
 
         DectableEnter(detectable);
@@ -53,8 +57,8 @@ public class Sensor : MonoBehaviour
     protected IEnumerator RemoveDectectable(IDetectable detectable)
     {
         yield return new WaitForSeconds(reactionTime);
-        _detectables.Remove(detectable);
         OnDetectLeave?.Invoke(detectable);
+        _detectables.Remove(detectable);
     }
 }
 

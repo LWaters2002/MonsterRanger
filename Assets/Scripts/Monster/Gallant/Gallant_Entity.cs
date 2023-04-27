@@ -22,7 +22,7 @@ public class Gallant_Entity : Entity
         base.Start();
 
         SetConstraints();
-
+        
         _UtilityAI = GetComponent<UtilityAI>();
         _UtilityAI.Init(this);
     }

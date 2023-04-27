@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,12 +32,49 @@ namespace UtilAI
         public override void Init()
         {
             _sensorManager = GetComponentInChildren<SensorManager>();
-
+            _sensorManager.Init();
+            
             WaterAreas = new List<Area>();
             WaterDetected = new List<Water>();
 
             FoodAreas = new List<Area>();
             FoodDetected = new List<Food>();
+
+            _sensorManager.DetectableAdded += DetectAdd;
+            _sensorManager.DetectableRemoved += DetectRemove;
+        }
+
+
+        protected virtual void DetectAdd(IDetectable obj)
+        {
+            SortFood(obj);
+        }
+
+        protected virtual void DetectRemove(IDetectable obj)
+        {
+            RemoveFood(obj);
+        }
+
+        private void RemoveFood(IDetectable obj)
+        {
+            foreach (Food food in FoodDetected)
+            {
+                if (food.gameObject == obj.gameObject)
+                {
+                    FoodDetected.Remove(food);
+                    break;
+                }
+            }
+        }
+
+        private void SortFood(IDetectable obj)
+        {
+            Food food = obj.gameObject.GetComponent<Food>();
+
+            if (food)
+            {
+                FoodDetected.Add(food);
+            }
         }
 
         public void AddArea(Area area)

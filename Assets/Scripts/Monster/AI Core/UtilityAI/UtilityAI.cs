@@ -40,6 +40,7 @@ namespace UtilAI
         private void InitialiseAndSortActions()
         {
             _liveActions = new List<Action>();
+            _longActions = new List<Action>();
             _reactiveStack = new Stack<Action>();
             _immediateStack = new Stack<Action>();
 
@@ -117,7 +118,7 @@ namespace UtilAI
             Action actionWithHighestScore = null;
             float score = 0f;
 
-            foreach (Action action in actions)
+            foreach (Action action in _longActions)
             {
                 float actionScore = action.CalculateScore();
 

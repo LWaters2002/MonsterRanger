@@ -9,38 +9,74 @@ public class VisualSensor : Sensor
 
     public LayerMask layer;
 
+    public float visionTickRate;
+
+    private List<IDetectable> _detectablesInRange;
+
+    public override void Init()
+    {
+        base.Init();
+        _detectablesInRange = new List<IDetectable>();
+        InvokeRepeating("VisionTick", 0.0f, visionTickRate);
+    }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        base.OnTriggerEnter(other);
+    }
+
     protected override void DectableEnter(IDetectable detectable)
     {
-        Vector3 direction = (transform.position - detectable.gameObject.transform.position).normalized;
-
-        //Checks for Line Of Sight
-        if (Physics.Raycast(transform.position, direction, out RaycastHit hit, passiveRange, layer))
-        {
-            if (hit.collider.gameObject == detectable.gameObject)
-            {
-                StartCoroutine(AddDetectable(detectable));
-            }
-        }
+        _detectablesInRange.Add(detectable);
     }
 
-    private void Update()
+    protected override void DectableExit(IDetectable detectable)
     {
-        foreach (IDetectable detectable in _detectables)
+        _detectablesInRange.Add(detectable);
+    }
+
+    private void VisionTick()
+    {
+        foreach (IDetectable detectable in _detectablesInRange)
         {
-            Vector3 direction = (transform.position - detectable.gameObject.transform.position).normalized;
+            bool contains = _detectables.Contains(detectable);
+            bool check = CheckLineOfSight(detectable);
 
-            //Checks for Line Of Sight
-            if (Physics.Raycast(transform.position, direction, out RaycastHit hit, activeRange, layer))
-            {
-                if (hit.collider.gameObject == detectable.gameObject)
-                {
-                    continue;
-                }
-            }
+            if (!contains && check) StartCoroutine(AddDetectable(detectable));
+            if (contains && !check) StartCoroutine(RemoveDectectable(detectable));
+        }
+    }
 
-            StartCoroutine(RemoveDectectable(detectable));
+    private bool CheckLineOfSight(IDetectable detectable)
+    {
+        Vector3 direction = (-transform.position + detectable.gameObject.transform.position).normalized;
+
+        if (Physics.Raycast(transform.position, direction, out RaycastHit hit, activeRange, layer))
+        {
+            bool exists = CheckTransformExistsInChildren(hit.collider.transform, detectable.gameObject.transform);
+
+            Color color = (exists) ? Color.green : Color.blue;
+
+            if (showDebug) Debug.DrawRay(transform.position, direction * passiveRange, color, visionTickRate);
+
+            return exists;
         }
 
+        return false;
 
     }
+
+    private bool CheckTransformExistsInChildren(Transform t0, Transform t1)
+    {
+        foreach (Transform transf in t1)
+        {
+            if (transf == t0)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }

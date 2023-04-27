@@ -36,7 +36,7 @@ namespace UtilAI
         public virtual float CalculateScore()
         {
             float sum = 0;
-            float combinedWeight = 1;
+            float combinedWeight = 0;
 
             foreach (Factor f in factors) // Come back to this
             {

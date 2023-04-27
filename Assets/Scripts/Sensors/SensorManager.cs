@@ -6,8 +6,9 @@ using System;
 
 public class SensorManager : MonoBehaviour
 {
-    private HashSet<Sensor> _sensors;
-    private List<IDetectable> _detectables;
+    public HashSet<Sensor> _sensors;
+
+    [SerializeField] private List<IDetectable> _detectables;
     private List<IDetectable> _rememberedDetectables;
 
     public float memoryDuration;
@@ -15,15 +16,12 @@ public class SensorManager : MonoBehaviour
     public Action<IDetectable> DetectableAdded;
     public Action<IDetectable> DetectableRemoved;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        Init();
-    }
-
     public void Init()
     {
         _sensors = GetComponentsInChildren<Sensor>().ToHashSet();
+
+        _detectables = new List<IDetectable>();
+        _rememberedDetectables = new List<IDetectable>();
 
         foreach (Sensor sensor in _sensors)
         {

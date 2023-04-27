@@ -6,7 +6,7 @@ namespace UtilAI
     public abstract class Factor : ScriptableObject
     {
         public AnimationCurve evaluationCurve;
-        public float weight;
+        public float weight = 1;
 
         public abstract float Evaluate();
 
