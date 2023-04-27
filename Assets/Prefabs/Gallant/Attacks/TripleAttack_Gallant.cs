@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TripleAttack_Gallant : AttackComponent
+public class TripleAttack_Gallant : Attack_Gallant
 {
     public GameObject prefab;
 

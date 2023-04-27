@@ -1,0 +1,99 @@
+Date : 2023-04-27 14:36:19
+Directory : c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts
+Total : 55 files,  3165 codes, 41 comments, 715 blanks, all 3921 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| C#       |         55 |      3,165 |         41 |        715 |      3,921 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                                                          | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                                                             |         55 |      3,165 |         41 |        715 |      3,921 |
+| . (Files)                                                                                                                                                     |          2 |      1,040 |         14 |         30 |      1,084 |
+| Attacking                                                                                                                                                     |          3 |         89 |          0 |         25 |        114 |
+| Attacking (Files)                                                                                                                                             |          2 |         63 |          0 |         19 |         82 |
+| Attacking\Attacks                                                                                                                                             |          1 |         26 |          0 |          6 |         32 |
+| Monster                                                                                                                                                       |         21 |        613 |          3 |        195 |        811 |
+| Monster\AI Core                                                                                                                                               |         19 |        573 |          1 |        178 |        752 |
+| Monster\AI Core\DamageSystem                                                                                                                                  |          2 |         94 |          1 |         33 |        128 |
+| Monster\AI Core\HFSM                                                                                                                                          |          2 |         57 |          0 |         20 |         77 |
+| Monster\AI Core\UtilityAI                                                                                                                                     |         15 |        422 |          0 |        125 |        547 |
+| Monster\AI Core\UtilityAI (Files)                                                                                                                             |          7 |        181 |          0 |         57 |        238 |
+| Monster\AI Core\UtilityAI\Actions                                                                                                                             |          3 |        159 |          0 |         49 |        208 |
+| Monster\AI Core\UtilityAI\Factors                                                                                                                             |          5 |         82 |          0 |         19 |        101 |
+| Monster\Gallant                                                                                                                                               |          2 |         40 |          2 |         17 |         59 |
+| Player                                                                                                                                                        |         11 |        858 |          9 |        281 |      1,148 |
+| Player (Files)                                                                                                                                                |          9 |        598 |          7 |        191 |        796 |
+| Player\HealingTool                                                                                                                                            |          2 |        260 |          2 |         90 |        352 |
+| Sensors                                                                                                                                                       |          4 |        145 |          4 |         51 |        200 |
+| Tracking                                                                                                                                                      |          3 |        136 |          0 |         39 |        175 |
+| UI                                                                                                                                                            |          6 |        151 |          8 |         51 |        210 |
+| Utility                                                                                                                                                       |          5 |        133 |          3 |         43 |        179 |
++---------------------------------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                                                                                      | language | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Attacking\AttackComponent.cs                                     | C#       |         27 |          0 |          8 |         35 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Attacking\AttackController.cs                                    | C#       |         36 |          0 |         11 |         47 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Attacking\Attacks\TailSwipe_Attack.cs                            | C#       |         26 |          0 |          6 |         32 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Controls.cs                                                      | C#       |        994 |         14 |         15 |      1,023 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Interfaces.cs                                                    | C#       |         46 |          0 |         15 |         61 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Monster\AI Core\DamageSystem\Hitbox.cs                           | C#       |         45 |          0 |         21 |         66 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Monster\AI Core\DamageSystem\Hurtbox.cs                          | C#       |         49 |          1 |         12 |         62 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Monster\AI Core\HFSM\FSM.cs                                      | C#       |         30 |          0 |          9 |         39 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Monster\AI Core\HFSM\States.cs                                   | C#       |         27 |          0 |         11 |         38 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Monster\AI Core\UtilityAI\Actions\Action.cs                      | C#       |         68 |          0 |         20 |         88 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Monster\AI Core\UtilityAI\Actions\DrinkAction.cs                 | C#       |         38 |          0 |         12 |         50 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Monster\AI Core\UtilityAI\Actions\EatAction.cs                   | C#       |         53 |          0 |         17 |         70 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Monster\AI Core\UtilityAI\Area.cs                                | C#       |         15 |          0 |          3 |         18 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Monster\AI Core\UtilityAI\Blackboard.cs                          | C#       |         11 |          0 |          3 |         14 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Monster\AI Core\UtilityAI\DebugUtilityAI.cs                      | C#       |         22 |          0 |          5 |         27 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Monster\AI Core\UtilityAI\Entity.cs                              | C#       |         41 |          0 |         14 |         55 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Monster\AI Core\UtilityAI\EntityBlackboard.cs                    | C#       |         28 |          0 |         11 |         39 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Monster\AI Core\UtilityAI\Factors\DistanceToFoodSourceFactor.cs  | C#       |         17 |          0 |          4 |         21 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Monster\AI Core\UtilityAI\Factors\DistanceToWaterSourceFactor.cs | C#       |         17 |          0 |          4 |         21 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Monster\AI Core\UtilityAI\Factors\Factor.cs                      | C#       |         16 |          0 |          4 |         20 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Monster\AI Core\UtilityAI\Factors\FoodFactor.cs                  | C#       |         16 |          0 |          4 |         20 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Monster\AI Core\UtilityAI\Factors\WaterFactor.cs                 | C#       |         16 |          0 |          3 |         19 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Monster\AI Core\UtilityAI\Resource.cs                            | C#       |          6 |          0 |          2 |          8 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Monster\AI Core\UtilityAI\UtilityAI.cs                           | C#       |         58 |          0 |         19 |         77 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Monster\Gallant\Gallant_Blackboard.cs                            | C#       |         16 |          2 |          5 |         23 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Monster\Gallant\Gallant_Entity.cs                                | C#       |         24 |          0 |         12 |         36 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Player\GameManager.cs                                            | C#       |         19 |          1 |          7 |         27 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Player\HealingTool\FireflyProjectile.cs                          | C#       |        104 |          0 |         38 |        142 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Player\HealingTool\HealingTool.cs                                | C#       |        156 |          2 |         52 |        210 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Player\Movement.cs                                               | C#       |        242 |          4 |         75 |        321 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Player\Pawn.cs                                                   | C#       |         22 |          0 |          6 |         28 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Player\PlayerCharacter.cs                                        | C#       |         85 |          1 |         31 |        117 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Player\PlayerController.cs                                       | C#       |         21 |          1 |          7 |         29 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Player\PlayerDamagedEffect.cs                                    | C#       |         47 |          0 |         14 |         61 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Player\PlayerInteractor.cs                                       | C#       |         45 |          0 |         12 |         57 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Player\PlayerStats.cs                                            | C#       |         61 |          0 |         22 |         83 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Player\Stat.cs                                                   | C#       |         56 |          0 |         17 |         73 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Sensors\AuralSensor.cs                                           | C#       |         26 |          0 |         12 |         38 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Sensors\Sensor.cs                                                | C#       |         45 |          0 |         16 |         61 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Sensors\SensorManager.cs                                         | C#       |         39 |          2 |         13 |         54 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Sensors\VisualSensor.cs                                          | C#       |         35 |          2 |         10 |         47 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Tracking\Footprint.cs                                            | C#       |         36 |          0 |          9 |         45 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Tracking\FootprintMinigame.cs                                    | C#       |         50 |          0 |         18 |         68 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Tracking\Track.cs                                                | C#       |         50 |          0 |         12 |         62 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\UI\FoodCollectible.cs                                            | C#       |         12 |          4 |          5 |         21 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\UI\FoodSource.cs                                                 | C#       |         53 |          0 |         24 |         77 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\UI\HUD.cs                                                        | C#       |         29 |          0 |          9 |         38 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\UI\UI.cs                                                         | C#       |         15 |          0 |          2 |         17 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\UI\UIHolder.cs                                                   | C#       |         30 |          0 |          6 |         36 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\UI\WaterCollectible.cs                                           | C#       |         12 |          4 |          5 |         21 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Utility\HealHelper.cs                                            | C#       |         31 |          2 |          8 |         41 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Utility\Lifetime.cs                                              | C#       |         20 |          0 |          6 |         26 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Utility\LookAtCamera.cs                                          | C#       |         17 |          0 |          5 |         22 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Utility\PIDBehaviour.cs                                          | C#       |         32 |          0 |         12 |         44 |
+| c:\Users\liamw\Documents\Documents 2.0\University [Level 6]\FYP\MonsterRanger\Assets\Scripts\Utility\PIDController.cs                                         | C#       |         33 |          1 |         12 |         46 |
+| Total                                                                                                                                                         |          |      3,165 |         41 |        715 |      3,921 |
++---------------------------------------------------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

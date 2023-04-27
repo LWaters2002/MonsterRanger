@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody))]
 public class EnemyProjectile : MonoBehaviour
@@ -13,11 +14,17 @@ public class EnemyProjectile : MonoBehaviour
 
     private ProjectileState _state = ProjectileState.Tracking;
 
+    public UnityEvent OnHit;
+
+    private Entity _owningEntity;
+
     [SerializeField]
     private float damage;
 
-    public void Init(float damage, Vector3 target)
+    public void Init(float damage, Vector3 target, Entity owningEntity)
     {
+        _owningEntity = owningEntity;
+
         _rigidbody = GetComponent<Rigidbody>();
         _PIDController = new PIDController(ref PID_Settings);
 
@@ -58,14 +65,14 @@ public class EnemyProjectile : MonoBehaviour
         Vector3 force = _PIDController.Update(Time.fixedDeltaTime, transform.position, _target);
         _rigidbody.AddForce(force, ForceMode.Acceleration);
     }
-    
+
     private void OnTriggerEnter(Collider other)
     {
         PlayerCharacter pc = other.GetComponentInParent<PlayerCharacter>();
         if (!pc) return;
 
         pc.stats.AlterHealth(-damage);
-    } 
+    }
 }
 
 public enum ProjectileState

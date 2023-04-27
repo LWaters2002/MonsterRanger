@@ -1644,9 +1644,11 @@ GameObject:
   - component: {fileID: 2252455808175521713}
   - component: {fileID: 5305935574982256075}
   - component: {fileID: 2252455808175521715}
-  - component: {fileID: 1334643404}
-  - component: {fileID: 187800828511050251}
+  - component: {fileID: 4994776189926623809}
   - component: {fileID: 7736034812487116600}
+  - component: {fileID: 187800828511050251}
+  - component: {fileID: 1334643404}
+  - component: {fileID: 9116510211443272897}
   m_Layer: 10
   m_Name: Gallant
   m_TagString: Untagged
@@ -1707,6 +1709,54 @@ CapsuleCollider:
   m_Height: 2.49
   m_Direction: 2
   m_Center: {x: 0, y: 0.90395594, z: 0}
+--- !u!195 &4994776189926623809
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443830510196450571}
+  m_Enabled: 1
+  m_AgentTypeID: -1372625422
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &7736034812487116600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443830510196450571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6baa88d925246d04f80530db5598765c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _HeadLookAtConstraint: {fileID: 0}
+--- !u!114 &187800828511050251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443830510196450571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4f426eb2a6a12d41bd7f87786a815e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxTravelDistance: 0
 --- !u!114 &1334643404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1720,7 +1770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attack: {fileID: 284113536}
---- !u!114 &187800828511050251
+--- !u!114 &9116510211443272897
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1729,33 +1779,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1443830510196450571}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4f426eb2a6a12d41bd7f87786a815e2, type: 3}
+  m_Script: {fileID: 11500000, guid: ef37ffaca2c39d14f9d51d82e6d3bc27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  water: 0
-  maxWater: 0
-  waterDecayRate: 0
-  hunger: 0
-  maxHunger: 0
-  hungerDecayRate: 0
-  sleepiness: 0
-  maxSleepiness: 0
-  waterAreas: []
-  foodAreas: []
-  maxTravelDistance: 0
---- !u!114 &7736034812487116600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1443830510196450571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6baa88d925246d04f80530db5598765c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mouth: {fileID: 0}
+  actions: []
+  reactiveTickInterval: 0
 --- !u!1 &1522532309890018206
 GameObject:
   m_ObjectHideFlags: 0

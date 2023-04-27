@@ -8,9 +8,11 @@ public class AttackComponent : MonoBehaviour
     public string attackName;
     public UnityEvent OnAttack;
 
-    private Entity _entity;
+    protected Entity _entity;
 
-    public void Init(Entity entity)
+    public System.Action OnAttackComplete;
+
+    public virtual void Init(Entity entity)
     {
         _entity = entity;
     }

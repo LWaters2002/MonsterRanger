@@ -21,26 +21,24 @@ public class AttackController : MonoBehaviour
         {
             attack.Init(_entity);
         }
-
-        Invoke("DelayStart", 2f);
     }
 
     private void DelayStart()
     {
-        _attack.StartAttack();                       
+        _attack.StartAttack();
     }
 
-    public bool SelectAttack(System.Type type)
+    public AttackComponent SelectAttack(string attackName)
     {
-        _attack = _attacks.Where(x => x.GetType() == type).First();
+        _attack = _attacks.Where(x => x.attackName == attackName).First();
 
+        Debug.Log(_attack.attackName + " Attack has started!");
         _attack.StartAttack();
         return _attack;
     }
 
     public void Attack(int attackStep)
     {
-        Debug.Log(_attack.attackName);
         _attack?.Attack(attackStep);
     }
 }

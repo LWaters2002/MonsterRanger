@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Hurtbox))]
-public class TailSwipe_Attack : AttackComponent
+public class TailSwipe_Attack : Attack_Gallant
 {
     [SerializeField]
     private Hurtbox _hurtbox;

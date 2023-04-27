@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoarAttack_Gallant : AttackComponent
+public class RoarAttack_Gallant : Attack_Gallant
 {
     public float roarRadius;
     public GameObject aura;
@@ -16,6 +16,7 @@ public class RoarAttack_Gallant : AttackComponent
 
     private List<Rigidbody> _rigidbodiesInRadius;
 
+#region Attack Steps
     public override void StartAttack()
     {
         base.StartAttack();
@@ -120,4 +121,9 @@ public class RoarAttack_Gallant : AttackComponent
         roar.SetActive(false);
 
     }
+#endregion
+
+
+
+
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StompAttack_Gallant : AttackComponent
+public class StompAttack_Gallant : Attack_Gallant
 {
     public EnemyProjectile projectilePrefab;
     public int projectileCount;
@@ -59,7 +59,7 @@ public class StompAttack_Gallant : AttackComponent
     private IEnumerator ShootAtPlayer()
     {
         launchSound.Play();
-        
+
         GameObject target = FindObjectOfType<PlayerCharacter>().gameObject;
 
         foreach (EnemyProjectile projectile in _projectiles)
@@ -83,7 +83,7 @@ public class StompAttack_Gallant : AttackComponent
             float angle = segment * i + offset - segment / 2;
 
             Vector3 target = transform.position + GetPositionGivenRadius(angle, radius);
-            projectile.Init(projectileDamage, target);
+            projectile.Init(projectileDamage, target, _entity);
 
             _projectiles.Add(projectile);
             yield return new WaitForSeconds(.8f / projectileCount);
