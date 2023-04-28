@@ -11,12 +11,12 @@ public class VisualSensor : Sensor
 
     public float visionTickRate;
 
-    private List<IDetectable> _detectablesInRange;
+    private HashSet<IDetectable> _detectablesInRange;
 
     public override void Init()
     {
         base.Init();
-        _detectablesInRange = new List<IDetectable>();
+        _detectablesInRange = new HashSet<IDetectable>();
         InvokeRepeating("VisionTick", 0.0f, visionTickRate);
     }
 
@@ -35,8 +35,15 @@ public class VisualSensor : Sensor
         _detectablesInRange.Add(detectable);
     }
 
+    protected override void RemoveNulls()
+    {
+        _detectablesInRange.RemoveWhere(x => ((x as UnityEngine.Object) == null));
+        base.RemoveNulls();
+    }
+
     private void VisionTick()
     {
+        RemoveNulls();
         foreach (IDetectable detectable in _detectablesInRange)
         {
             bool contains = _detectables.Contains(detectable);

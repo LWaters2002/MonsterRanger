@@ -23,6 +23,9 @@ namespace UtilAI
         private Stack<Action> _reactiveStack;
         private Stack<Action> _immediateStack;
 
+        [Header("Debug Options")]
+        public bool printLiveActionScores;
+
         #endregion
 
         public void Init(Entity entity)
@@ -66,7 +69,8 @@ namespace UtilAI
         {
             foreach (Action action in _liveActions)
             {
-                action.CalculateScore();
+                float score = action.CalculateScore();
+                if (printLiveActionScores) Debug.Log(action.GetType() + "- score : " + score);
             }
         }
 
@@ -85,19 +89,32 @@ namespace UtilAI
         #region Action Methods
         public void ExecuteOptimalAction()
         {
+
+            if (currentAction)
+            {
+                if (currentAction.type == ActionType.immeidate) return;
+            }
+
             if (_immediateStack.Count > 0)
             {
                 SetCurrentAction(_immediateStack.Pop());
                 return;
             }
 
+            if (currentAction)
+            {
+                if (currentAction.type == ActionType.reactive) return;
+            }
+            
             if (_reactiveStack.Count > 0)
             {
-                SetCurrentAction(_immediateStack.Pop());
+                SetCurrentAction(_reactiveStack.Pop());
                 return;
             }
 
             SetCurrentAction(GetBestLongAction());
+
+            if (currentAction) Debug.Log("Utility AI : New Action - " + currentAction.GetType());
         }
 
         private void SetCurrentAction(Action actionToSet)

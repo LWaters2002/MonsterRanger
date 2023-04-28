@@ -8,17 +8,17 @@ public class ConsumeFood_GA : Gallant_Action
 {
     public override void Entry()
     {
+        entity.agent.isStopped = true;
+
         AttackComponent attackC = entity.attackController.SelectAttack("ConsumeFood");
         attackC.OnAttackComplete += Complete;
     }
 
     public override void FixedTick(float fixedDeltaTime)
     {
-        throw new System.NotImplementedException();
     }
 
     public override void Tick(float deltaTime)
     {
-        throw new System.NotImplementedException();
     }
 }

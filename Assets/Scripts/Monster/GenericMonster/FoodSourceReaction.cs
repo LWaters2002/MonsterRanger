@@ -15,26 +15,59 @@ namespace UtilActions
 
         bool consuming = false;
 
+        public override void Init(UtilityAI utilityAI, Entity entity)
+        {
+            base.Init(utilityAI, entity);
+            ConsumeAction = Instantiate(ConsumeAction);
+            ConsumeAction.Init(utilityAI, entity);
+        }
+
         public override void Entry()
         {
-            _targetFood = entity.blackboard.FoodDetected.OrderBy(x => Vector3.Distance(x.transform.position, entity.transform.position)).First();
+            ConsumeAction.OnComplete += SetTargetFood;
+
+            _targetFood = entity.blackboard.GetDetected<Food>().
+            OrderBy(x => Vector3.Distance(x.transform.position, entity.transform.position)).
+            First();
 
             if (!_targetFood) { Complete(); return; }
 
             entity.agent.SetDestination(_targetFood.transform.position);
         }
 
-        public override void Tick(float deltaTime)
+        private void SetTargetFood()
         {
-            if (consuming) return;
+            consuming = false;
 
+            _targetFood = entity.blackboard.GetDetected<Food>().
+            OrderBy(x => Vector3.Distance(x.transform.position, entity.transform.position)).
+            First();
+
+            if (!_targetFood) { Complete(); return; }
+
+            entity.agent.SetDestination(_targetFood.transform.position);
+            entity.agent.isStopped = false;
+        }
+
+        private void CheckFood()
+        {
+            if (!_targetFood) { SetTargetFood(); return; }
+            
             float distanceToFood = Vector3.Distance(entity.transform.position, _targetFood.transform.position);
 
             if (distanceToFood < entity.blackboard.foodConsumeRange)
             {
+                entity.blackboard.Target = _targetFood.gameObject;
                 utilityAI.AddImmediateAction(ConsumeAction);
                 consuming = true;
             }
+        }
+
+        public override void Tick(float deltaTime)
+        {
+            if (consuming) return;
+
+            CheckFood();
         }
 
         public override void FixedTick(float fixedDeltaTime)

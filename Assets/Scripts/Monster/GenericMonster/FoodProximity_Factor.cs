@@ -12,7 +12,9 @@ public class FoodProximity_Factor : Factor
     {
         float distance = Mathf.Infinity;
 
-        foreach (Food food in blackboard.FoodDetected)
+        List<Food> foods = blackboard.GetDetected<Food>();
+
+        foreach (Food food in foods)
         {
             float newDistance = Vector3.Distance(food.transform.position, blackboard.transform.position);
 

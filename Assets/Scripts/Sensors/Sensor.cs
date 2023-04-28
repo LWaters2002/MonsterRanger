@@ -8,14 +8,15 @@ public class Sensor : MonoBehaviour
 
     public System.Action<IDetectable> OnDetectEnter;
     public System.Action<IDetectable> OnDetectLeave;
+    public System.Action RemovedNulls;
 
-    public List<IDetectable> _detectables { get; protected set; }
+    public HashSet<IDetectable> _detectables { get; protected set; }
 
     public bool showDebug;
 
     public virtual void Init()
     {
-        _detectables = new List<IDetectable>();
+        _detectables = new HashSet<IDetectable>();
     }
 
     protected virtual void OnTriggerEnter(Collider other)
@@ -39,7 +40,6 @@ public class Sensor : MonoBehaviour
 
     protected virtual void DectableEnter(IDetectable detectable)
     {
-
     }
 
     protected virtual void DectableExit(IDetectable detectable)
@@ -50,15 +50,28 @@ public class Sensor : MonoBehaviour
     protected IEnumerator AddDetectable(IDetectable detectable)
     {
         yield return new WaitForSeconds(reactionTime);
-        _detectables.Add(detectable);
-        OnDetectEnter?.Invoke(detectable);
+        if (!_detectables.Contains(detectable))
+        {
+            _detectables.Add(detectable);
+            detectable.onDestroy += RemoveNulls;
+            OnDetectEnter?.Invoke(detectable);
+        }
+    }
+
+    protected virtual void RemoveNulls()
+    {
+        _detectables.RemoveWhere(x => ((x as UnityEngine.Object) == null));
+        RemovedNulls?.Invoke();
     }
 
     protected IEnumerator RemoveDectectable(IDetectable detectable)
     {
         yield return new WaitForSeconds(reactionTime);
-        OnDetectLeave?.Invoke(detectable);
-        _detectables.Remove(detectable);
+        if (_detectables.Contains(detectable))
+        {
+            OnDetectLeave?.Invoke(detectable);
+            _detectables.Remove(detectable);
+        }
     }
 }
 

@@ -5,6 +5,8 @@ using UnityEngine;
 public interface IDetectable
 {
     public GameObject gameObject { get; }
+    public MonoBehaviour mono { get; }
+    public System.Action onDestroy { get; set; }
 }
 
 public enum DetectableType

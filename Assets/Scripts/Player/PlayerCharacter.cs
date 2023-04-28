@@ -7,6 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(Movement))]
 public class PlayerCharacter : Pawn, IDamagable, IDetectable
 {
+
     public Movement movement { get; private set; }
     public Rigidbody rb { get; private set; }
     public Animator animator { get; private set; }
@@ -15,6 +16,12 @@ public class PlayerCharacter : Pawn, IDamagable, IDetectable
 
     [field: SerializeField]
     public HealingTool healingTool { get; private set; }
+
+    public MonoBehaviour mono => this;
+
+    public Action onDestroy { get; set; }
+    private void OnDestroy() => onDestroy?.Invoke();
+
 
     private Vector2 mouseDelta;
 
@@ -42,7 +49,7 @@ public class PlayerCharacter : Pawn, IDamagable, IDetectable
         stats = new PlayerStats(this, 100, 100, 100);
 
         movement.OnDash += PlayDashAnimation;
-        
+
         InitChain();
     }
 

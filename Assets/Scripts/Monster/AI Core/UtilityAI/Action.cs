@@ -10,7 +10,7 @@ namespace UtilAI
         public float score;
 
         public float baseScore;
-        
+
         public ActionType type;
         public float liveThreshold;
 
@@ -38,7 +38,7 @@ namespace UtilAI
             float sum = 0;
             float combinedWeight = 0;
 
-            foreach (Factor f in factors) // Come back to this
+            foreach (Factor f in factors)
             {
                 combinedWeight += f.weight;
                 sum += f.Evaluate() * f.weight;
@@ -46,6 +46,12 @@ namespace UtilAI
 
             sum /= combinedWeight;
             score = sum / factors.Length;
+
+            if (score > liveThreshold)
+            {
+                if (type == ActionType.reactive) utilityAI.AddReactiveAction(this);
+                if (type == ActionType.immeidate) utilityAI.AddImmediateAction(this);
+            }
 
             return score;
         }

@@ -9,6 +9,8 @@ public class ConsumeFood_Attack : Attack_Gallant
 
     public Transform headTransform;
 
+    private bool _turn;
+
     public override void Attack(int attackStep)
     {
         base.Attack(attackStep);
@@ -16,21 +18,39 @@ public class ConsumeFood_Attack : Attack_Gallant
         switch (attackStep)
         {
             case 0:
+
                 SpawnProjectile();
+                StartCoroutine(TurnToTarget());
                 break;
             case 1:
                 ReturnProjectile();
+                _turn = false;
                 break;
             case 2:
                 Eat();
                 break;
+            case 3:
+                AttackComplete();
+                break;
+        }
+    }
+
+    IEnumerator TurnToTarget()
+    {
+        _turn = true;
+        Quaternion targetRotation = Quaternion.LookRotation(_entity.blackboard.Target.transform.position - transform.position);
+
+        while (_turn)
+        {
+            _entity.transform.rotation = Quaternion.Lerp(_entity.transform.rotation, targetRotation, Time.deltaTime * 4f);
+            yield return null;
         }
     }
 
     private void SpawnProjectile()
     {
         _projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-        _projectile.Init(0f, _entity.Target.transform.position, _entity);
+        _projectile.Init(0f, _entity.blackboard.Target.transform.position, _entity);
     }
 
     private void ReturnProjectile()
@@ -40,7 +60,7 @@ public class ConsumeFood_Attack : Attack_Gallant
 
     private void Eat()
     {
-        Destroy(_projectile);
+        Destroy(_projectile.gameObject);
     }
 
 

@@ -6,7 +6,7 @@ public class FoodConsumeProjectile : EnemyProjectile
 {
     public Transform childTransform;
 
-    public System.Action<Food> FoodHit; 
+    public System.Action<Food> FoodHit;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,6 +19,6 @@ public class FoodConsumeProjectile : EnemyProjectile
             food.transform.SetParent(childTransform);
         }
     }
-    
+
 
 }

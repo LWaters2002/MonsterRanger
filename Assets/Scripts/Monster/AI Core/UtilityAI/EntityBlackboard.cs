@@ -23,8 +23,7 @@ namespace UtilAI
 
         public Entity entity { get; private set; }
 
-        public List<Food> FoodDetected { get; private set; }
-        public List<Water> WaterDetected { get; private set; }
+        public GameObject Target { get; set; }
 
         public float maxTravelDistance;
         bool isSleeping = false;
@@ -33,48 +32,26 @@ namespace UtilAI
         {
             _sensorManager = GetComponentInChildren<SensorManager>();
             _sensorManager.Init();
-            
+
             WaterAreas = new List<Area>();
-            WaterDetected = new List<Water>();
-
             FoodAreas = new List<Area>();
-            FoodDetected = new List<Food>();
-
-            _sensorManager.DetectableAdded += DetectAdd;
-            _sensorManager.DetectableRemoved += DetectRemove;
         }
 
-
-        protected virtual void DetectAdd(IDetectable obj)
+        public List<T> GetDetected<T>() where T : MonoBehaviour
         {
-            SortFood(obj);
-        }
+            _sensorManager.RemoveNulls();
 
-        protected virtual void DetectRemove(IDetectable obj)
-        {
-            RemoveFood(obj);
-        }
+            List<T> detectedList = new List<T>();
 
-        private void RemoveFood(IDetectable obj)
-        {
-            foreach (Food food in FoodDetected)
+            foreach (IDetectable detect in _sensorManager._detectables)
             {
-                if (food.gameObject == obj.gameObject)
+                if (detect.mono is T)
                 {
-                    FoodDetected.Remove(food);
-                    break;
+                    detectedList.Add((T)detect.mono);
                 }
             }
-        }
 
-        private void SortFood(IDetectable obj)
-        {
-            Food food = obj.gameObject.GetComponent<Food>();
-
-            if (food)
-            {
-                FoodDetected.Add(food);
-            }
+            return detectedList;
         }
 
         public void AddArea(Area area)
