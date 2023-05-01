@@ -14,6 +14,16 @@ public class AttackComponent : MonoBehaviour
 
     private bool _active;
 
+    [Header("Effectiveness")]
+    public float minimumRange;
+    public float maximumRange;
+
+    public float cooldown;
+    private float _cooldown;
+
+    public float weight;
+
+
     public virtual void Init(Entity entity)
     {
         _entity = entity;
@@ -23,18 +33,15 @@ public class AttackComponent : MonoBehaviour
     {
         _entity.animator.CrossFade(attackName, .25f);
         _active = true;
+        _cooldown = cooldown;
     }
 
     public virtual void Update()
     {
-        // if (!_active) return;
-
-        // AnimatorStateInfo info = _entity.animator.GetCurrentAnimatorStateInfo(0);
-
-        // if ((info.length > info.normalizedTime) && info.IsName(attackName))
-        // {
-        //     AttackComplete();
-        // }
+        if (_cooldown > 0.0f && !_active)
+        {
+            _cooldown -= Time.deltaTime;
+        }
     }
 
     public void AttackComplete()
@@ -51,6 +58,12 @@ public class AttackComponent : MonoBehaviour
 
     public virtual float CalculateEffectiveness()
     {
-        return 1.0f;
+        if (_cooldown > 0.0f) return 0.0f;
+
+        float dist = _entity.blackboard.DistanceToTarget;
+
+        if (dist < minimumRange || dist > maximumRange) return 0.0f;
+
+        return 1.0f * weight;
     }
 }

@@ -99,10 +99,4 @@ public class StompAttack_Gallant : Attack_Gallant
         Vector3 vT = (sin * transform.right + cos * transform.up) * inRadius;
         return vT;
     }
-
-
-    public override float CalculateEffectiveness()
-    {
-        return base.CalculateEffectiveness();
-    }
 }

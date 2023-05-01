@@ -105,7 +105,7 @@ namespace UtilAI
             {
                 if (currentAction.type == ActionType.reactive) return;
             }
-            
+
             if (_reactiveStack.Count > 0)
             {
                 SetCurrentAction(_reactiveStack.Pop());

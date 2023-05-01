@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class EnemyProjectile : MonoBehaviour
 {
     public PIDSettings PID_Settings;
-    private Rigidbody _rigidbody;
+    protected Rigidbody _rigidbody;
     private PIDController _PIDController;
 
     private Vector3 _target;

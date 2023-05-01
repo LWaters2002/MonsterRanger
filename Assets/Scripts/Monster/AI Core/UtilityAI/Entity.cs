@@ -37,5 +37,11 @@ public class Entity : MonoBehaviour, IDetectable
 
     }
 
+    public void TurnToTargetTicked(float speed)
+    {
+        Quaternion targetRotation = Quaternion.LookRotation(blackboard.Target.transform.position - transform.position);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * speed);
+    }
+
 }
 

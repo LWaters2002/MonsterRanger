@@ -99,6 +99,7 @@ MonoBehaviour:
         m_CallState: 2
   damage: 0
   childTransform: {fileID: 2894958947035959647}
+  pullForce: 35
 --- !u!95 &4210880341312637893
 Animator:
   serializedVersion: 4
@@ -9868,5 +9869,5 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.2
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}

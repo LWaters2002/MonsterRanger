@@ -4,40 +4,67 @@ using UnityEngine;
 
 public class TripleAttack_Gallant : Attack_Gallant
 {
-    public GameObject prefab;
+    public Animator animator;
+
+    public EnemyProjectile projectilePrefab;
+    private EnemyProjectile _projectile;
+
+    public Transform projectileSpawn;
+
+    public float turnAmount = 2f;
+    public float launchForce = 60f;
+
+    int spawnIndex;
 
     public override void Attack(int attackStep)
     {
         base.Attack(attackStep);
 
+        _entity.agent.isStopped = true;
+
+        IEnumerator turning = Turn();
+
         switch (attackStep)
         {
             case 0:
-                CreateOrb(2f);
+                CreateOrbs();
+                StartCoroutine(turning);
                 break;
             case 1:
+                ShootOrb();
                 break;
             case 2:
+                ShootOrb();
                 break;
             case 3:
-                break;
-            case 4:
+                StopAllCoroutines();
+                ShootOrb();
                 break;
         }
     }
 
-    private void CreateOrb(float length)
+    private IEnumerator Turn()
     {
-
+        while (true)
+        {
+            _entity.TurnToTargetTicked(turnAmount);
+            yield return null;
+        }
     }
 
-    private IEnumerator ScaleOrb()
+
+    private void CreateOrbs()
     {
-        yield return null;
+        animator.Play("charge");
     }
 
-    public override float CalculateEffectiveness()
+    private void ShootOrb()
     {
-        return base.CalculateEffectiveness();
+        Vector3 targetPos = _entity.blackboard.Target.transform.position;
+
+        _projectile = Instantiate(projectilePrefab, projectileSpawn.position, Quaternion.identity);
+        _projectile.Init(60f, targetPos, _entity);
+        _projectile.SetState(ProjectileState.Physics);
+        _projectile.LaunchAtTarget(_entity.blackboard.Target.transform.position, launchForce);
     }
 }

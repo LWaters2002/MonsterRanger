@@ -14,13 +14,35 @@ public class RoarAttack_Gallant : Attack_Gallant
     public float pullStrength;
     public float repelStrength;
 
+    public float maxWalkTime = 1f;
+
     private List<Rigidbody> _rigidbodiesInRadius;
 
-#region Attack Steps
+    #region Attack Steps
     public override void StartAttack()
     {
-        base.StartAttack();
+        StartCoroutine(WalkToPlayer());
     }
+
+    public IEnumerator WalkToPlayer()
+    {
+        Vector3 location = Vector3.Lerp(_entity.transform.position, _entity.blackboard.Target.transform.position, .8f);
+
+        _entity.agent.SetDestination(location);
+        _entity.agent.isStopped = false;
+
+        float t = 0;
+
+        while (Vector3.Distance(_entity.transform.position, location) > .1f && t < maxWalkTime)
+        {
+            t += Time.deltaTime;
+            yield return null;
+        }
+
+        base.StartAttack();
+        _entity.agent.isStopped = true;
+    }
+
     public override void Attack(int attackStep)
     {
         base.Attack(attackStep);
@@ -28,8 +50,10 @@ public class RoarAttack_Gallant : Attack_Gallant
         switch (attackStep)
         {
             case 0:
+                StartCoroutine(GrowAura());
                 break;
             case 1:
+                StartCoroutine(PullRigidbodies());
                 break;
             case 2:
                 StartCoroutine(RepelRigidbodies());
@@ -121,7 +145,7 @@ public class RoarAttack_Gallant : Attack_Gallant
         roar.SetActive(false);
 
     }
-#endregion
+    #endregion
 
 
 

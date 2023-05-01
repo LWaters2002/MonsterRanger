@@ -17,25 +17,5 @@ public class Attack_Gallant : AttackComponent
     {
         base.Attack(attackStep);
     }
-
-    public override float CalculateEffectiveness()
-    {
-        return base.CalculateEffectiveness();
-    }
-
-    public override bool Equals(object other)
-    {
-        return base.Equals(other);
-    }
-
-    public override int GetHashCode()
-    {
-        return base.GetHashCode();
-    }
-
-    public override void StartAttack()
-    {
-        base.StartAttack();
-    }
-
+    
 }

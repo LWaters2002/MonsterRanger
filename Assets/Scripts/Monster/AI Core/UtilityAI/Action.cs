@@ -8,6 +8,7 @@ namespace UtilAI
     {
         [HideInInspector]
         public float score;
+        public float scoreMultiplier = 1.0f;
 
         public float baseScore;
 
@@ -53,7 +54,7 @@ namespace UtilAI
                 if (type == ActionType.immeidate) utilityAI.AddImmediateAction(this);
             }
 
-            return score;
+            return score*scoreMultiplier;
         }
 
         public abstract void Entry();

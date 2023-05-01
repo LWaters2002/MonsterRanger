@@ -23,6 +23,7 @@ public class Stat
     public void AddModifier(StatModifier modifier)
     {
         if (modifier == null) return;
+        if (_modifiers.Contains(modifier)) return;
 
         _modifiers.Add(modifier);
         CalculateValue();

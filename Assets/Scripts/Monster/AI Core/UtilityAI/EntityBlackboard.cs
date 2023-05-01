@@ -24,6 +24,7 @@ namespace UtilAI
         public Entity entity { get; private set; }
 
         public GameObject Target { get; set; }
+        public float DistanceToTarget { get; set; }
 
         public float maxTravelDistance;
         bool isSleeping = false;
@@ -52,6 +53,11 @@ namespace UtilAI
             }
 
             return detectedList;
+        }
+
+        protected virtual void Update()
+        {
+            DistanceToTarget = Vector3.Distance(Target.transform.position, entity.transform.position);
         }
 
         public void AddArea(Area area)

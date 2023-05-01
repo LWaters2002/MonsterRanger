@@ -20,12 +20,17 @@ public class PlayerDamagedEffect : MonoBehaviour
     public AnimationCurve vignetteCurve;
     private Vignette vignette;
 
+    private IEnumerator _alterRoutine;
+
     private void Start()
     {
         PlayerStats stats = playerCharacter.stats;
 
         stats.OnDamaged += RecieveDamage;
         GetPostProcessComponents();
+
+        _alterRoutine = AlterFloatParameterForDuration(vignette.intensity, vignetteIntensity, vignetteDuration, vignetteCurve);
+
     }
 
     private void GetPostProcessComponents()
@@ -54,7 +59,8 @@ public class PlayerDamagedEffect : MonoBehaviour
     private void RecieveDamage(float damageAmount)
     {
         impulseSource.GenerateImpulse(.1f);
-        StartCoroutine(AlterFloatParameterForDuration(vignette.intensity, vignetteIntensity, vignetteDuration, vignetteCurve));
+        StopCoroutine(_alterRoutine);
+        StartCoroutine(_alterRoutine);
         playerCharacter.movement.AddMovementMultiplier(movementDebuff, debuffDuration);
     }
 }

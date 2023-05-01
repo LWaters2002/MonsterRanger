@@ -158,7 +158,7 @@ public class Movement : MonoBehaviour
         {
             _isSprinting = true;
         }
-        
+
     }
 
     private void FixedUpdate()
@@ -225,7 +225,9 @@ public class Movement : MonoBehaviour
 
         float multiplier = (_isSprinting) ? sprintMultiplier : 1f;
 
-        _player.rb.AddForce(projectDirection * _speed * multiplier * _externalMultiplier.Value, ForceMode.Acceleration);
+        float externalModifier = Mathf.Clamp(_externalMultiplier.Value, 0f, 100f);
+
+        _player.rb.AddForce(projectDirection * _speed * multiplier * externalModifier, ForceMode.Acceleration);
     }
 
     private void GroundCheck()

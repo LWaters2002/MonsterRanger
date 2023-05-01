@@ -5,6 +5,7 @@ using UnityEngine;
 public class FoodConsumeProjectile : EnemyProjectile
 {
     public Transform childTransform;
+    public float pullForce = 35f;
 
     public System.Action<Food> FoodHit;
 
@@ -17,6 +18,16 @@ public class FoodConsumeProjectile : EnemyProjectile
             OnHit?.Invoke();
             FoodHit?.Invoke(food);
             food.transform.SetParent(childTransform);
+            return;
+        }
+
+        PlayerCharacter player = other.GetComponentInParent<PlayerCharacter>();
+
+        if (player)
+        {
+            Vector3 dir = -_rigidbody.velocity.normalized + Vector3.one * .2f;
+            player.rb.AddForce(dir * pullForce, ForceMode.Impulse);
+            return;
         }
     }
 
