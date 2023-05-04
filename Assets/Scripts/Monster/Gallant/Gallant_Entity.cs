@@ -22,19 +22,20 @@ public class Gallant_Entity : Entity
         base.Start();
 
         SetConstraints();
-        
+
         _UtilityAI = GetComponent<UtilityAI>();
         _UtilityAI.Init(this);
     }
 
     private void SetConstraints()
     {
-
     }
 
     public void LookAtTarget(bool lookAtTarget)
     {
         _HeadLookAtConstraint.constraintActive = lookAtTarget;
     }
+
+
 
 }

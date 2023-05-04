@@ -13,10 +13,11 @@ public class TailSwipe_Attack : Attack_Gallant
     public float turnDuration;
 
     public float maxWalkTime = 1f;
+    public float speed = 5;
 
     public override void StartAttack()
     {
-        StartCoroutine(WalkToPlayer());
+        StartCoroutine(_entity.WalkToTarget(base.StartAttack, maxWalkTime, .8f, speed));
     }
 
     public override void Attack(int attackStep)
@@ -47,29 +48,11 @@ public class TailSwipe_Attack : Attack_Gallant
             yield return null;
         }
 
-        base.StartAttack();
+        //  base.StartAttack();
     }
 
 
-    public IEnumerator WalkToPlayer()
-    {
-        Vector3 location = Vector3.Lerp(_entity.transform.position, _entity.blackboard.Target.transform.position, .8f);
 
-        _entity.agent.SetDestination(location);
-        _entity.agent.isStopped = false;
-        _entity.agent.speed = 7f;
-        float t = 0;
-
-        while (Vector3.Distance(_entity.transform.position, location) > .2f && t < maxWalkTime)
-        {
-            t += Time.deltaTime;
-            yield return null;
-        }
-
-        _entity.agent.isStopped = true;
-        StartCoroutine(FaceTarget());
-
-    }
 
 
 }

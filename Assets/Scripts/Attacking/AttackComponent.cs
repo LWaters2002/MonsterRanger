@@ -14,6 +14,8 @@ public class AttackComponent : MonoBehaviour
 
     private bool _active;
 
+    public float exhaustAmount;
+    
     [Header("Effectiveness")]
     public float minimumRange;
     public float maximumRange;

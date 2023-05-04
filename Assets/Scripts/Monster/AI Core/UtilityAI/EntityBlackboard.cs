@@ -38,6 +38,11 @@ namespace UtilAI
             FoodAreas = new List<Area>();
         }
 
+        public virtual void SetEntity(Entity entity)
+        {
+            this.entity = entity;
+        }
+
         public List<T> GetDetected<T>() where T : MonoBehaviour
         {
             _sensorManager.RemoveNulls();
@@ -57,6 +62,7 @@ namespace UtilAI
 
         protected virtual void Update()
         {
+            if (!Target) return;
             DistanceToTarget = Vector3.Distance(Target.transform.position, entity.transform.position);
         }
 

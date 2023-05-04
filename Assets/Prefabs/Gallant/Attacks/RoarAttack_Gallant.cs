@@ -15,13 +15,14 @@ public class RoarAttack_Gallant : Attack_Gallant
     public float repelStrength;
 
     public float maxWalkTime = 1f;
+    public float speed = 4f;
 
     private List<Rigidbody> _rigidbodiesInRadius;
 
     #region Attack Steps
     public override void StartAttack()
     {
-        StartCoroutine(WalkToPlayer());
+        StartCoroutine(_entity.WalkToTarget(base.StartAttack, maxWalkTime, .9f, speed));
     }
 
     public IEnumerator WalkToPlayer()
@@ -99,6 +100,7 @@ public class RoarAttack_Gallant : Attack_Gallant
 
             foreach (Rigidbody rigidbody in _rigidbodiesInRadius)
             {
+                if (!rigidbody) continue;
                 Vector3 direction = (-rigidbody.position + transform.position).normalized;
                 rigidbody.AddForce(direction * pullStrength * (1 - percent), ForceMode.Force);
             }
@@ -135,6 +137,7 @@ public class RoarAttack_Gallant : Attack_Gallant
 
             foreach (Rigidbody rigidbody in _rigidbodiesInRadius)
             {
+                if (!rigidbody) continue;
                 Vector3 direction = (rigidbody.position - transform.position).normalized;
                 rigidbody.AddForce(direction * repelStrength * length, ForceMode.Force);
             }

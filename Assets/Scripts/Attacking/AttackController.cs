@@ -14,6 +14,10 @@ public class AttackController : MonoBehaviour
 
     private Entity _entity;
 
+    private float _exhaust = 0.0f;
+    public float exhaustCap;
+    public float exhaustTime;
+
     public void Init(Entity entity)
     {
         _entity = entity;
@@ -25,8 +29,33 @@ public class AttackController : MonoBehaviour
         }
     }
 
+    public bool CheckExhaust()
+    {
+        if (_exhaust < exhaustCap) return false;
+
+        StartCoroutine(LargeExhaust());
+
+        return true;
+    }
+
+    private IEnumerator LargeExhaust()
+    {
+        _entity.animator.SetBool("Exhausted", true);
+        _entity.animator.CrossFade("LargeExhaust", .2f);
+
+        yield return new WaitForSeconds(exhaustTime);
+
+        _entity.animator.SetBool("Exhausted", false);
+        _exhaust = 0;
+
+        ChooseAttack();
+    }
+
     public void ChooseAttack()
     {
+
+        if (CheckExhaust()) return;
+
         AttackComponent idealAttack = null;
         float highestScore = 0.0f;
 
@@ -36,7 +65,7 @@ public class AttackController : MonoBehaviour
         {
             float effectiveness = attack.CalculateEffectiveness();
 
-            Debug.Log("Score : " + effectiveness + " - " + attack.attackName);
+            // Debug.Log("Score : " + effectiveness + " - " + attack.attackName);
 
             if (effectiveness == 0.0f) continue;
 
@@ -71,6 +100,8 @@ public class AttackController : MonoBehaviour
         _attack.OnAttackComplete += ChooseAttack;
 
         Debug.Log(_attack.attackName + " Attack has started!");
+        _exhaust += _attack.exhaustAmount;
+
         _attack.StartAttack();
     }
 

@@ -20,6 +20,7 @@ public class Entity : MonoBehaviour, IDetectable
     public System.Action onDestroy { get; set; }
     private void OnDestroy() => onDestroy?.Invoke();
 
+    public float maxAgentSpeed = 6f;
 
     protected virtual void Start()
     {
@@ -29,12 +30,13 @@ public class Entity : MonoBehaviour, IDetectable
         agent = GetComponent<NavMeshAgent>();
 
         blackboard.Init();
+        blackboard.SetEntity(this);
         attackController.Init(this);
     }
 
     protected virtual void Update()
     {
-
+        animator?.SetFloat("Speed", agent.speed / maxAgentSpeed);
     }
 
     public void TurnToTargetTicked(float speed)
@@ -43,5 +45,29 @@ public class Entity : MonoBehaviour, IDetectable
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * speed);
     }
 
+    public IEnumerator WalkToTarget(System.Action callback, float walkTime, float walkPercent, float speed)
+    {
+        Vector3 location = Vector3.Lerp(transform.position, blackboard.Target.transform.position, walkPercent);
+
+        agent.speed = speed;
+
+        agent.SetDestination(location);
+        agent.isStopped = false;
+
+        animator.SetBool("isMoving", true);
+
+        float t = 0;
+
+        while (Vector3.Distance(transform.position, location) > .2f && t < walkTime)
+        {
+            t += Time.deltaTime;
+            yield return null;
+        }
+
+        callback?.Invoke();
+
+        animator.SetBool("isMoving", false);
+        agent.isStopped = true;
+    }
 }
 
