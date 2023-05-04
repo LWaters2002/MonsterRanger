@@ -7,6 +7,7 @@ namespace UtilAI
     public class Area : MonoBehaviour
     {
         public AreaType type;
+        public bool isCore;
         
         void OnTriggerEnter(Collider other)
         {
@@ -20,6 +21,7 @@ namespace UtilAI
     public enum AreaType
     {
         Water,
-        Food
+        Food,
+        Sleep
     }
 }

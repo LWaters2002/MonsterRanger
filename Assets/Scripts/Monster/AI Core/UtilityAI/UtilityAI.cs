@@ -70,6 +70,7 @@ namespace UtilAI
             foreach (Action action in _liveActions)
             {
                 float score = action.CalculateScore();
+
                 if (printLiveActionScores) Debug.Log(action.GetType() + "- score : " + score);
             }
         }
@@ -119,7 +120,7 @@ namespace UtilAI
 
         private void SetCurrentAction(Action actionToSet)
         {
-            if (!actionToSet) return;
+            if (!actionToSet) { currentAction = null; return; }
             if (actionToSet == currentAction) return;
 
             if (currentAction) currentAction.OnComplete -= ActionFinished;
@@ -139,6 +140,7 @@ namespace UtilAI
             {
                 float actionScore = action.CalculateScore();
 
+                if (actionScore < action.deadThreshold) continue;
                 if (actionScore < score) continue;
 
                 actionWithHighestScore = action;
@@ -164,6 +166,7 @@ namespace UtilAI
 
         private void ActionFinished()
         {
+            currentAction = null;
             ExecuteOptimalAction();
         }
 

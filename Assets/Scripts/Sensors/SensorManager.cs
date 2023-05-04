@@ -9,8 +9,7 @@ public class SensorManager : MonoBehaviour
     public HashSet<Sensor> _sensors;
 
     public HashSet<IDetectable> _detectables { get; private set; }
-
-    private HashSet<IDetectable> _rememberedDetectables;
+    private HashSet<IDetectable> _forgottenDetectables;
 
     public float memoryDuration;
 
@@ -22,7 +21,7 @@ public class SensorManager : MonoBehaviour
         _sensors = GetComponentsInChildren<Sensor>().ToHashSet();
 
         _detectables = new HashSet<IDetectable>();
-        _rememberedDetectables = new HashSet<IDetectable>();
+        _forgottenDetectables = new HashSet<IDetectable>();
 
         foreach (Sensor sensor in _sensors)
         {
@@ -51,13 +50,27 @@ public class SensorManager : MonoBehaviour
             return;
         }
 
-        DetectableRemoved?.Invoke(detectable);
-        _detectables.Remove(detectable);
+        if (!_forgottenDetectables.Contains(detectable)) return;
+        StartCoroutine(ForgetDetectable(detectable));
+    }
+
+    private IEnumerator ForgetDetectable(IDetectable detectable)
+    {
+        _forgottenDetectables.Add(detectable);
+
+        yield return new WaitForSeconds(memoryDuration);
+
+        if (_forgottenDetectables.Contains(detectable))
+        {
+            DetectableRemoved?.Invoke(detectable);
+            _detectables.Remove(detectable);
+        }
     }
 
     private void SensorEnter(IDetectable detectable)
     {
         if (_detectables.Contains(detectable)) return;
+        if (_forgottenDetectables.Contains(detectable)) _forgottenDetectables.Remove(detectable);
 
         DetectableAdded?.Invoke(detectable);
         _detectables.Add(detectable);

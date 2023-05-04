@@ -63,8 +63,9 @@ public class AttackController : MonoBehaviour
 
         foreach (AttackComponent attack in _attacks)
         {
+            if (!attack.isEnabled) continue;
+            
             float effectiveness = attack.CalculateEffectiveness();
-
             // Debug.Log("Score : " + effectiveness + " - " + attack.attackName);
 
             if (effectiveness == 0.0f) continue;
@@ -107,10 +108,10 @@ public class AttackController : MonoBehaviour
 
     public AttackComponent SelectAttack(string attackName)
     {
-        AttackComponent attack = _attacks.Where(x => x.attackName == attackName).First();
+        _attack = _attacks.Where(x => x.attackName == attackName).First();
 
-        attack.StartAttack();
-        return attack;
+        _attack.StartAttack();
+        return _attack;
     }
 
     public void Attack(int attackStep)

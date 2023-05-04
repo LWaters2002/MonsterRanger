@@ -9,6 +9,8 @@ public class ConsumeFood_Attack : Attack_Gallant
 
     public Transform headTransform;
 
+    public float foodAmount = 20f;
+
     private bool _turn;
 
     public override void Attack(int attackStep)
@@ -60,6 +62,7 @@ public class ConsumeFood_Attack : Attack_Gallant
 
     private void Eat()
     {
+        _entity.blackboard.AdjustFood(foodAmount);
         Destroy(_projectile.gameObject);
     }
 

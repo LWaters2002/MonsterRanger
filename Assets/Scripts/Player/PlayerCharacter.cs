@@ -7,7 +7,6 @@ using UnityEngine;
 [RequireComponent(typeof(Movement))]
 public class PlayerCharacter : Pawn, IDamagable, IDetectable
 {
-
     public Movement movement { get; private set; }
     public Rigidbody rb { get; private set; }
     public Animator animator { get; private set; }
@@ -33,8 +32,7 @@ public class PlayerCharacter : Pawn, IDamagable, IDetectable
     [SerializeField] private PIDBehaviour crystalPrefab;
     public Transform crystalTarget;
 
-    public HUD hudPrefab;
-    private HUD hud;
+    public LUI.PlayerUI[] PlayerUIsPrefabs;
 
     private Vector2 mouseRotationVector = Vector2.zero;
 
@@ -62,11 +60,17 @@ public class PlayerCharacter : Pawn, IDamagable, IDetectable
     {
         interactor.Init(this);
 
-        hud = (HUD)LUI.UIHolder.AddElement(hudPrefab);
-        hud.Init(this);
-
         healingTool?.Init(this);
         movement.Init(this);
+    }
+
+    private void CreateUI()
+    {
+        foreach (LUI.PlayerUI pUI in PlayerUIsPrefabs)
+        {
+            LUI.PlayerUI tempPUI = (LUI.PlayerUI)LUI.UIHolder.AddElement(pUI);
+            tempPUI.Init(this);
+        }
     }
 
     private void Update()
@@ -85,6 +89,7 @@ public class PlayerCharacter : Pawn, IDamagable, IDetectable
         controls.Gameplay.Use.canceled += Use;
 
         movement.BindControls(controls);
+        CreateUI();
     }
 
     private void Use(UnityEngine.InputSystem.InputAction.CallbackContext context)

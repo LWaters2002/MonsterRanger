@@ -4,17 +4,16 @@ using UnityEngine;
 
 namespace UtilAI
 {
-    [CreateAssetMenu(fileName = "Food_Factor", menuName = "ScriptObjects/Factors/Food", order = 0)]
+    [CreateAssetMenu(fileName = "Food Factor", menuName = "ScriptObjects/Factors/Food", order = 0)]
     public class FoodFactor : Factor
     {
         public override float Evaluate()
         {
-            float percent = blackboard.HungerMeter;
+            float percent = blackboard.GetFoodMeter();
 
             float evaluatedValue = evaluationCurve.Evaluate(percent);
 
-            return evaluatedValue;
+            return 1 - evaluatedValue;
         }
-
     }
 }

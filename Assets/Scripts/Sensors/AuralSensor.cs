@@ -4,34 +4,26 @@ using UnityEngine;
 
 public class AuralSensor : Sensor
 {
+    public float audioTick = .2f;
 
     private HashSet<AudioSource> _audioSources;
 
-    protected override void OnTriggerEnter(Collider other)
+    public override void Init()
     {
+        base.Init();
+        _audioSources = new HashSet<AudioSource>();
 
-        AudioSource source = other.GetComponentInParent<AudioSource>();
-        if (!source) return;
-
-        _audioSources.Add(source);
+        InvokeRepeating("AudioTick", 0f, audioTick);
     }
 
-    private void Update()
+    private void AudioTick()
     {
-        foreach (AudioSource source in _audioSources)
-        {
-            if (source.isPlaying)
-            {
-                
-            }
-        }
+        //
     }
 
     protected override void DectableEnter(IDetectable detectable)
     {
-        detectable.gameObject.GetComponentInParent<AudioSource>();
+        base.DectableEnter(detectable);
+        StartCoroutine(AddDetectable(detectable));
     }
-
-
-
 }

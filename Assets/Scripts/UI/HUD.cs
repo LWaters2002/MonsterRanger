@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using LUI;
 
-public class HUD : UI
+public class HUD : PlayerUI
 {
     private PlayerStats _playerStats;
 
@@ -13,7 +13,7 @@ public class HUD : UI
     [SerializeField]
     private Image staminaBar;
 
-    public void Init(PlayerCharacter playerCharacter)
+    public override void Init(PlayerCharacter playerCharacter)
     {
         _playerStats = playerCharacter.stats;
 

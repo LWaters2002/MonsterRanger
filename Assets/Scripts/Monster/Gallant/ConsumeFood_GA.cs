@@ -21,4 +21,10 @@ public class ConsumeFood_GA : Gallant_Action
     public override void Tick(float deltaTime)
     {
     }
+
+    public override void Complete()
+    {
+        base.Complete();
+        entity.blackboard.AdjustFood(22.5f);
+    }
 }

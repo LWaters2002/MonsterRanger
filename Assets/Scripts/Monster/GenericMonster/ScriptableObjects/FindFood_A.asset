@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cce39240911dcb345bd48d3946d148f4, type: 3}
+  m_Name: FindFood_A
+  m_EditorClassIdentifier: 
+  score: 0
+  scoreMultiplier: 1
+  baseScore: 0
+  type: 0
+  deadThreshold: 0.3
+  liveThreshold: 0
+  factors:
+  - {fileID: 11400000, guid: 2e3f45ee45b0ae244aca9f47c57804e0, type: 2}
+  areaType: 1

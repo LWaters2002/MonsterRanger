@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: FoodReactor_A
   m_EditorClassIdentifier: 
   score: 0
+  scoreMultiplier: 1
   baseScore: 0
   type: 1
+  deadThreshold: 0
   liveThreshold: 0.7
   factors:
   - {fileID: 11400000, guid: 147312b52c0eaf640a222cbafd5775f0, type: 2}
+  - {fileID: 11400000, guid: 2e3f45ee45b0ae244aca9f47c57804e0, type: 2}
   ConsumeAction: {fileID: 11400000, guid: 6231966aa4858e44f9ef7112a7ff4bea, type: 2}

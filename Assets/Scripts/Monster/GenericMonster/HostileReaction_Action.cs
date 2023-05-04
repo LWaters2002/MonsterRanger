@@ -22,13 +22,18 @@ namespace UtilActions
 
             if (!playerCharacter) Complete();
 
+            entity.agent.isStopped = true;
+
             entity.blackboard.Target = playerCharacter.gameObject;
-            
+
             entity.attackController.ChooseAttack();
         }
 
         public override void Tick(float deltaTime)
         {
+            playerCharacter = entity.blackboard.GetDetected<PlayerCharacter>().First();
+
+            if (!playerCharacter) Complete();
         }
 
         public override void FixedTick(float fixedDeltaTime)
@@ -37,7 +42,8 @@ namespace UtilActions
 
         public override void Complete()
         {
-
+            entity.agent.isStopped = true;
+            
             base.Complete();
         }
     }

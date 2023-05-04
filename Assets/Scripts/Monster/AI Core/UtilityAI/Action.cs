@@ -13,6 +13,7 @@ namespace UtilAI
         public float baseScore;
 
         public ActionType type;
+        public float deadThreshold;
         public float liveThreshold;
 
         protected Entity entity;
@@ -42,10 +43,10 @@ namespace UtilAI
             foreach (Factor f in factors)
             {
                 combinedWeight += f.weight;
-                sum += f.Evaluate() * f.weight;
+                sum += f.Evaluate();
             }
 
-            sum /= combinedWeight;
+            //sum /= combinedWeight;
             score = sum / factors.Length;
 
             if (score > liveThreshold)
@@ -54,7 +55,7 @@ namespace UtilAI
                 if (type == ActionType.immeidate) utilityAI.AddImmediateAction(this);
             }
 
-            return score*scoreMultiplier;
+            return score * scoreMultiplier;
         }
 
         public abstract void Entry();
@@ -65,8 +66,6 @@ namespace UtilAI
         {
             OnComplete?.Invoke();
         }
-
-
     }
 }
 

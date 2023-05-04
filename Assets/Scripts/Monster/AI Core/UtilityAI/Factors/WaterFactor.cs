@@ -9,11 +9,11 @@ namespace UtilAI
     {
         public override float Evaluate()
         {
-            float percent = blackboard.WaterMeter;
+            float percent = blackboard.GetWaterMeter();
 
             float evaluatedValue = evaluationCurve.Evaluate(percent);
 
-            return evaluatedValue;
+            return 1 - evaluatedValue;
         }
     }
 }

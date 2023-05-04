@@ -40,6 +40,8 @@ public static class ExtensionMethods
 {
     public static Vector3 GetClosestArea(this List<UtilAI.Area> locations, Vector3 position)
     {
+        if (locations.Count == 0) return Vector3.one;
+        
         Vector3 closest = locations[0].transform.position;
 
         float closestDistance = Vector3.Distance(position, closest);

@@ -26,7 +26,11 @@ namespace UtilActions
         {
             ConsumeAction.OnComplete += SetTargetFood;
 
-            _targetFood = entity.blackboard.GetDetected<Food>().
+            List<Food> foodList = entity.blackboard.GetDetected<Food>();
+
+            if (foodList.Count == 0) { Complete(); return; }
+
+            _targetFood = foodList.
             OrderBy(x => Vector3.Distance(x.transform.position, entity.transform.position)).
             First();
 
@@ -39,11 +43,13 @@ namespace UtilActions
         {
             consuming = false;
 
-            _targetFood = entity.blackboard.GetDetected<Food>().
+            List<Food> foodList = entity.blackboard.GetDetected<Food>();
+
+            if (foodList.Count == 0) { Complete(); return; }
+
+            _targetFood = foodList.
             OrderBy(x => Vector3.Distance(x.transform.position, entity.transform.position)).
             First();
-
-            if (!_targetFood) { Complete(); return; }
 
             entity.agent.SetDestination(_targetFood.transform.position);
             entity.agent.isStopped = false;
@@ -52,7 +58,7 @@ namespace UtilActions
         private void CheckFood()
         {
             if (!_targetFood) { SetTargetFood(); return; }
-            
+
             float distanceToFood = Vector3.Distance(entity.transform.position, _targetFood.transform.position);
 
             if (distanceToFood < entity.blackboard.foodConsumeRange)

@@ -89,6 +89,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleJournal"",
+                    ""type"": ""Button"",
+                    ""id"": ""9cb1131d-d191-42ac-b488-0016457b9411"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -210,6 +219,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1cba0469-7420-4d80-9225-ce64b2ea2653"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleJournal"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -743,6 +763,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
         m_Gameplay_Use = m_Gameplay.FindAction("Use", throwIfNotFound: true);
         m_Gameplay_Dash = m_Gameplay.FindAction("Dash", throwIfNotFound: true);
+        m_Gameplay_ToggleJournal = m_Gameplay.FindAction("ToggleJournal", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -821,6 +842,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Interact;
     private readonly InputAction m_Gameplay_Use;
     private readonly InputAction m_Gameplay_Dash;
+    private readonly InputAction m_Gameplay_ToggleJournal;
     public struct GameplayActions
     {
         private @Controls m_Wrapper;
@@ -832,6 +854,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Interact => m_Wrapper.m_Gameplay_Interact;
         public InputAction @Use => m_Wrapper.m_Gameplay_Use;
         public InputAction @Dash => m_Wrapper.m_Gameplay_Dash;
+        public InputAction @ToggleJournal => m_Wrapper.m_Gameplay_ToggleJournal;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -862,6 +885,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Dash.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnDash;
+                @ToggleJournal.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnToggleJournal;
+                @ToggleJournal.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnToggleJournal;
+                @ToggleJournal.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnToggleJournal;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -887,6 +913,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
+                @ToggleJournal.started += instance.OnToggleJournal;
+                @ToggleJournal.performed += instance.OnToggleJournal;
+                @ToggleJournal.canceled += instance.OnToggleJournal;
             }
         }
     }
@@ -1005,6 +1034,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnUse(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnToggleJournal(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

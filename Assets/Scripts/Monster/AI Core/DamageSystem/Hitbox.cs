@@ -15,7 +15,8 @@ public class Hitbox : MonoBehaviour, IMarkable, IHealable
     public UnityEvent OnFullMarked;
     public UnityEvent OnFullHeal;
 
-    public bool isHealed { get; private set; }
+
+    public bool isHealed;
     public bool isMarked { get; private set; }
 
     public System.Action<string, float, float> OnHeal;
@@ -36,7 +37,7 @@ public class Hitbox : MonoBehaviour, IMarkable, IHealable
         }
 
         OnHeal?.Invoke(partName, _healAmount, healRequired);
-        
+
         return true;
     }
 

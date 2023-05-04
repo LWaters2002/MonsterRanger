@@ -12,6 +12,8 @@ public class AttackComponent : MonoBehaviour
 
     public System.Action OnAttackComplete;
 
+    public bool isEnabled;
+
     private bool _active;
 
     public float exhaustAmount;
@@ -25,7 +27,11 @@ public class AttackComponent : MonoBehaviour
 
     public float weight;
 
-
+    public void SetIsEnabled(bool _enabled)
+    {
+        isEnabled = _enabled;
+    }
+    
     public virtual void Init(Entity entity)
     {
         _entity = entity;
