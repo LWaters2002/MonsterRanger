@@ -29,6 +29,8 @@ public class PlayerCharacter : Pawn, IDamagable, IDetectable
     [SerializeField] private float sensitivity;
     public Transform orientation;
 
+    public Transform spawnTransform;
+
     [Space]
     [SerializeField] private PIDBehaviour crystalPrefab;
     public Transform crystalTarget;
@@ -49,10 +51,17 @@ public class PlayerCharacter : Pawn, IDamagable, IDetectable
         interactor = GetComponent<PlayerInteractor>();
 
         stats = new PlayerStats(this, 100, 100, 100);
-
+        stats.OnDeath += Death;
         movement.OnDash += PlayDashAnimation;
 
         InitChain();
+    }
+
+    public void Death()
+    {
+        rb.MovePosition(spawnTransform.position);
+        stats.AlterHealth(100);
+        stats.AlterStamina(100);
     }
 
     private void PlayDashAnimation(float obj)
@@ -97,7 +106,7 @@ public class PlayerCharacter : Pawn, IDamagable, IDetectable
 
         movement.BindControls(controls);
         interactor?.Init(this);
-        
+
         CreateUI();
     }
 

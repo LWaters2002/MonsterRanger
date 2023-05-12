@@ -46,7 +46,7 @@ public class PlayerStats
         _health = Mathf.Clamp(_health, 0f, _maxHealth);
         OnHealthChange?.Invoke(_health, _maxHealth);
         if (_health <= 0f) { OnDeath?.Invoke(); }
-    }   
+    }
 
     IEnumerator RegenStamina()
     {

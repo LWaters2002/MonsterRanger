@@ -34,7 +34,7 @@ namespace UtilAI
         [Header("Sleep")]
         public float sleepDecay;
         public float maxSleepMeter;
-        private float _sleepMeter;
+        private float _sleepMeter = 10;
 
         public float GetSleepMeter() => _sleepMeter / maxSleepMeter;
         public List<Area> SleepAreas { get; private set; }
