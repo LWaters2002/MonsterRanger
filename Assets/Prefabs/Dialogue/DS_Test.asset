@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2efc6c407a3bca42998d060a77d2cce, type: 3}
+  m_Name: DS_Test
+  m_EditorClassIdentifier: 
+  skippable: 0
+  isCutsceneDialogue: 0
+  dialogues:
+  - text: "Yet another day, Being a ranger. \nOh wait I forgot you're new. "
+    characterPrintTime: 0.1
+  - text: "Well let me explain, \nYou're a ranger, for what can only be described
+      as monster.\n"
+    characterPrintTime: 0.06
+  - text: "These monster's are attacked by poachers, \nHunters and numerous other
+      things, this usually isn't a problem.\nBut they don't finish the job. "
+    characterPrintTime: 0.03
+  - text: 'This is a problem, since these ''Monsters'' are quite powerful.
+
+      and
+      when they''re upset or in danger, they tend to destroy the ecosystem around
+      us.
+
+      But hunting isn''t the solution, they''re required.'
+    characterPrintTime: 0.03

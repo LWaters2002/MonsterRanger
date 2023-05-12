@@ -98,6 +98,24 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SkipDialogue"",
+                    ""type"": ""Button"",
+                    ""id"": ""0ea04236-7c48-4ed4-b2fd-f3ebd3360dee"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EndDialogue"",
+                    ""type"": ""Button"",
+                    ""id"": ""8f682fcb-b424-40fa-85be-d9f032b9ba35"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -230,6 +248,28 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ToggleJournal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b142b3c0-453c-4566-99bd-d9850ed8739b"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SkipDialogue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1e527d7a-2186-4fc4-9c27-3853785a10ec"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EndDialogue"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -764,6 +804,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_Gameplay_Use = m_Gameplay.FindAction("Use", throwIfNotFound: true);
         m_Gameplay_Dash = m_Gameplay.FindAction("Dash", throwIfNotFound: true);
         m_Gameplay_ToggleJournal = m_Gameplay.FindAction("ToggleJournal", throwIfNotFound: true);
+        m_Gameplay_SkipDialogue = m_Gameplay.FindAction("SkipDialogue", throwIfNotFound: true);
+        m_Gameplay_EndDialogue = m_Gameplay.FindAction("EndDialogue", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -843,6 +885,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Use;
     private readonly InputAction m_Gameplay_Dash;
     private readonly InputAction m_Gameplay_ToggleJournal;
+    private readonly InputAction m_Gameplay_SkipDialogue;
+    private readonly InputAction m_Gameplay_EndDialogue;
     public struct GameplayActions
     {
         private @Controls m_Wrapper;
@@ -855,6 +899,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Use => m_Wrapper.m_Gameplay_Use;
         public InputAction @Dash => m_Wrapper.m_Gameplay_Dash;
         public InputAction @ToggleJournal => m_Wrapper.m_Gameplay_ToggleJournal;
+        public InputAction @SkipDialogue => m_Wrapper.m_Gameplay_SkipDialogue;
+        public InputAction @EndDialogue => m_Wrapper.m_Gameplay_EndDialogue;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -888,6 +934,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @ToggleJournal.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnToggleJournal;
                 @ToggleJournal.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnToggleJournal;
                 @ToggleJournal.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnToggleJournal;
+                @SkipDialogue.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSkipDialogue;
+                @SkipDialogue.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSkipDialogue;
+                @SkipDialogue.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSkipDialogue;
+                @EndDialogue.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnEndDialogue;
+                @EndDialogue.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnEndDialogue;
+                @EndDialogue.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnEndDialogue;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -916,6 +968,12 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @ToggleJournal.started += instance.OnToggleJournal;
                 @ToggleJournal.performed += instance.OnToggleJournal;
                 @ToggleJournal.canceled += instance.OnToggleJournal;
+                @SkipDialogue.started += instance.OnSkipDialogue;
+                @SkipDialogue.performed += instance.OnSkipDialogue;
+                @SkipDialogue.canceled += instance.OnSkipDialogue;
+                @EndDialogue.started += instance.OnEndDialogue;
+                @EndDialogue.performed += instance.OnEndDialogue;
+                @EndDialogue.canceled += instance.OnEndDialogue;
             }
         }
     }
@@ -1035,6 +1093,8 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnUse(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnToggleJournal(InputAction.CallbackContext context);
+        void OnSkipDialogue(InputAction.CallbackContext context);
+        void OnEndDialogue(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

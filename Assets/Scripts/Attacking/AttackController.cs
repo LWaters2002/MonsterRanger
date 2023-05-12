@@ -51,6 +51,14 @@ public class AttackController : MonoBehaviour
         ChooseAttack();
     }
 
+    public void SetEnabledAllAttacks(bool isEnabled)
+    {
+        foreach (AttackComponent attack in _attacks)
+        {
+            attack.enabled = isEnabled;
+        }
+    }
+
     public void ChooseAttack()
     {
 
@@ -64,7 +72,7 @@ public class AttackController : MonoBehaviour
         foreach (AttackComponent attack in _attacks)
         {
             if (!attack.isEnabled) continue;
-            
+
             float effectiveness = attack.CalculateEffectiveness();
             // Debug.Log("Score : " + effectiveness + " - " + attack.attackName);
 

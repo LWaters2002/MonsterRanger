@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace UtilAI
 {
-    [RequireComponent(typeof(Entity))]
     public class UtilityAI : MonoBehaviour
     {
         #region Variables

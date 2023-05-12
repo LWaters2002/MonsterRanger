@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2efc6c407a3bca42998d060a77d2cce, type: 3}
+  m_Name: DS_EndSequence
+  m_EditorClassIdentifier: 
+  skippable: 0
+  isCutsceneDialogue: 0
+  dialogues:
+  - text: Welp.
+    characterPrintTime: 0.1
+  - text: "What can I say, \nGood Job Recruit."
+    characterPrintTime: 0.04
+  - text: 'You can take the rest of the day off.
+
+      and err..'
+    characterPrintTime: 0.04
+  - text: We'll find a way to get you down from there.
+    characterPrintTime: 0.04

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2efc6c407a3bca42998d060a77d2cce, type: 3}
+  m_Name: DS_Marking
+  m_EditorClassIdentifier: 
+  skippable: 0
+  isCutsceneDialogue: 0
+  dialogues:
+  - text: This is good, The Gallant's Vulnerable.
+    characterPrintTime: 0.03
+  - text: "The Fireflies will take it from here, and mark \nthe monster."
+    characterPrintTime: 0.03
+  - text: 'With the monster marked by the fireflies it will be
+
+      under their
+      and our protection from now on.'
+    characterPrintTime: 0.03

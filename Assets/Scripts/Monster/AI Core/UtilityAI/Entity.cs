@@ -5,7 +5,6 @@ using UtilAI;
 using UnityEngine.AI;
 using System;
 
-[RequireComponent(typeof(AttackController))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(NavMeshAgent))]
 public class Entity : MonoBehaviour, IDetectable

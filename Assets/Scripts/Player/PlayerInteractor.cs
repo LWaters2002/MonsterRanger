@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerInteractor : MonoBehaviour
 {
@@ -15,6 +17,13 @@ public class PlayerInteractor : MonoBehaviour
     public void Init(PlayerCharacter player)
     {
         Player = player;
+
+        Player.controls.Gameplay.Interact.performed += InteractWith;
+    }
+
+    private void InteractWith(InputAction.CallbackContext context)
+    {
+        if (_interactable != null) _interactable.Interact(this);
     }
 
     private void Update()
@@ -29,8 +38,12 @@ public class PlayerInteractor : MonoBehaviour
         if (Physics.Raycast(Player.orientation.position, Player.orientation.forward, out RaycastHit hit, range, mask))
         {
 
-            if (hit.collider.gameObject.TryGetComponent(out IInteractable interactable))
+
+            IInteractable interactable = hit.collider.gameObject.GetComponentInParent<IInteractable>();
+
+            if (interactable != null)
             {
+                Debug.Log("Interact Cast");
                 if (_interactable == interactable) return;
 
                 _interactable = interactable;

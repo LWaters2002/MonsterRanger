@@ -353,3 +353,71 @@ MonoBehaviour:
       m_YScaleBool: 0
       m_ZScaleBool: 0
     name: CrystalSmooth
+  - gameObject: {fileID: 3977365282198030536, guid: 98bd1645b1b8d7a4d93c120852cde4a8,
+      type: 3}
+    settings:
+      m_Strength: 100
+      m_RotationRangeMin: {x: 0, y: 0, z: 0}
+      m_RotationRangeMax: {x: 0, y: 0, z: 0}
+      m_ScaleRangeMin: {x: 1, y: 1, z: 1}
+      m_ScaleRangeMax: {x: 1, y: 1, z: 1}
+      m_UniformScale: {x: 3.5384614, y: 3.5384614}
+      m_UniformBool: 1
+      m_XRotationBool: 0
+      m_YRotationBool: 0
+      m_ZRotationBool: 0
+      m_XScaleBool: 0
+      m_YScaleBool: 0
+      m_ZScaleBool: 0
+    name: TFF_Rock_Large_02A
+  - gameObject: {fileID: 5279046732762050657, guid: 10f7890dcc972314eab7ccfcf445c176,
+      type: 3}
+    settings:
+      m_Strength: 50
+      m_RotationRangeMin: {x: 0, y: 0, z: 0}
+      m_RotationRangeMax: {x: 0, y: 0, z: 0}
+      m_ScaleRangeMin: {x: 1, y: 1, z: 1}
+      m_ScaleRangeMax: {x: 1, y: 1, z: 1}
+      m_UniformScale: {x: 1.2307692, y: 3.1153831}
+      m_UniformBool: 1
+      m_XRotationBool: 1
+      m_YRotationBool: 0
+      m_ZRotationBool: 0
+      m_XScaleBool: 0
+      m_YScaleBool: 0
+      m_ZScaleBool: 0
+    name: TFF_Rock_Large_05A
+  - gameObject: {fileID: 8772648035309327700, guid: c8b1da0fbab714f47847c30e2149442d,
+      type: 3}
+    settings:
+      m_Strength: 50
+      m_RotationRangeMin: {x: 0, y: 0, z: 0}
+      m_RotationRangeMax: {x: 0, y: 0, z: 0}
+      m_ScaleRangeMin: {x: 1, y: 1, z: 1}
+      m_ScaleRangeMax: {x: 1, y: 1, z: 1}
+      m_UniformScale: {x: 2.1923077, y: 2.1923077}
+      m_UniformBool: 1
+      m_XRotationBool: 0
+      m_YRotationBool: 0
+      m_ZRotationBool: 0
+      m_XScaleBool: 0
+      m_YScaleBool: 0
+      m_ZScaleBool: 0
+    name: TFF_Rock_Medium_03A
+  - gameObject: {fileID: 3799213099928599575, guid: a81763150bed0ad459b6743638ad5be4,
+      type: 3}
+    settings:
+      m_Strength: 50
+      m_RotationRangeMin: {x: 0, y: 0, z: 0}
+      m_RotationRangeMax: {x: 0, y: 0, z: 0}
+      m_ScaleRangeMin: {x: 1, y: 1, z: 1}
+      m_ScaleRangeMax: {x: 1, y: 1, z: 1}
+      m_UniformScale: {x: 1, y: 3.2692308}
+      m_UniformBool: 1
+      m_XRotationBool: 0
+      m_YRotationBool: 0
+      m_ZRotationBool: 0
+      m_XScaleBool: 0
+      m_YScaleBool: 0
+      m_ZScaleBool: 0
+    name: TFF_Rock_Medium_06A

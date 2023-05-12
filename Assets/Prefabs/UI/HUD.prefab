@@ -572,7 +572,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7059432913799622105}
-  - component: {fileID: 7059432913799622117}
+  - component: {fileID: 3036740296562557705}
   m_Layer: 5
   m_Name: HUD
   m_TagString: Untagged
@@ -602,7 +602,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7059432913799622117
+--- !u!114 &3036740296562557705
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -12,6 +12,8 @@ public class PlayerCharacter : Pawn, IDamagable, IDetectable
     public Animator animator { get; private set; }
     public PlayerInteractor interactor { get; private set; }
     public PlayerStats stats { get; private set; }
+    public DialogueBox dialogueBox { get; private set; }
+    public InformationLog informationLog { get; private set; }
 
     [field: SerializeField]
     public HealingTool healingTool { get; private set; }
@@ -20,7 +22,6 @@ public class PlayerCharacter : Pawn, IDamagable, IDetectable
 
     public Action onDestroy { get; set; }
     private void OnDestroy() => onDestroy?.Invoke();
-
 
     private Vector2 mouseDelta;
 
@@ -33,6 +34,9 @@ public class PlayerCharacter : Pawn, IDamagable, IDetectable
     public Transform crystalTarget;
 
     public LUI.PlayerUI[] PlayerUIsPrefabs;
+
+    public DialogueBox dialogueBoxPrefab;
+    public InformationLog informationLogPrefab;
 
     private Vector2 mouseRotationVector = Vector2.zero;
 
@@ -58,8 +62,6 @@ public class PlayerCharacter : Pawn, IDamagable, IDetectable
 
     private void InitChain()
     {
-        interactor.Init(this);
-
         healingTool?.Init(this);
         movement.Init(this);
     }
@@ -71,6 +73,11 @@ public class PlayerCharacter : Pawn, IDamagable, IDetectable
             LUI.PlayerUI tempPUI = (LUI.PlayerUI)LUI.UIHolder.AddElement(pUI);
             tempPUI.Init(this);
         }
+
+        dialogueBox = (DialogueBox)LUI.UIHolder.AddElement(dialogueBoxPrefab);
+        dialogueBox.Init(this);
+        informationLog = (InformationLog)LUI.UIHolder.AddElement(informationLogPrefab);
+        informationLog.Init(this);
     }
 
     private void Update()
@@ -89,6 +96,8 @@ public class PlayerCharacter : Pawn, IDamagable, IDetectable
         controls.Gameplay.Use.canceled += Use;
 
         movement.BindControls(controls);
+        interactor?.Init(this);
+        
         CreateUI();
     }
 

@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 
 public class Footprint : Track
 {
-    public LUI.UI footprintMinigameUI;
 
     bool interactHeld;
 
@@ -14,15 +13,6 @@ public class Footprint : Track
     {
         base.StartedLooking(interactor);
         interactor.Player.controls.Gameplay.Interact.performed += ProcessInteractButton;
-    }
-
-    private void Update()
-    {
-        if (interactHeld)
-        {
-            LUI.UIHolder.AddElement(footprintMinigameUI);
-            Destroy(gameObject);
-        }
     }
 
     private void ProcessInteractButton(InputAction.CallbackContext ctx)

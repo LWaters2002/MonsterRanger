@@ -76,6 +76,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SkipDialogue",
+                    "type": "Button",
+                    "id": "0ea04236-7c48-4ed4-b2fd-f3ebd3360dee",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EndDialogue",
+                    "type": "Button",
+                    "id": "8f682fcb-b424-40fa-85be-d9f032b9ba35",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -208,6 +226,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "ToggleJournal",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b142b3c0-453c-4566-99bd-d9850ed8739b",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SkipDialogue",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1e527d7a-2186-4fc4-9c27-3853785a10ec",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EndDialogue",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

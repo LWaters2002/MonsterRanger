@@ -10,6 +10,12 @@ public class Track : MonoBehaviour, IInteractable
     protected Material _decalMaterial;
     protected PlayerInteractor _interactor;
 
+    public int logbookInformationID = -1;
+
+    public Transform locationReveal;
+    public PointerArrow pointerArrowPrefab;
+
+    [Header("Events")]
     public UnityEvent OnLookAt;
     public UnityEvent OnLookLeave;
 
@@ -26,29 +32,10 @@ public class Track : MonoBehaviour, IInteractable
         }
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (!other.transform.parent) return;
-
-        if (other.transform.parent.TryGetComponent(out PlayerCharacter player))
-        {
-            _decalMaterial?.SetFloat("_Highlight", 1f);
-        }
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        if (!other.transform.parent) return;
-
-        if (other.transform.parent.TryGetComponent(out PlayerCharacter player))
-        {
-            _decalMaterial?.SetFloat("_Highlight", 0f);
-        }
-    }
-
     public virtual void StartedLooking(PlayerInteractor interactor)
     {
         _interactor = interactor;
+        _decalMaterial?.SetFloat("_Highlight", 1f);
         OnLookAt?.Invoke();
     }
 
@@ -56,6 +43,22 @@ public class Track : MonoBehaviour, IInteractable
     {
         if (interactor != _interactor) return;
         OnLookLeave?.Invoke();
+        _decalMaterial?.SetFloat("_Highlight", 0f);
         _interactor = null;
+    }
+
+    public virtual void Interact(PlayerInteractor interactor)
+    {
+        interactor.Player.informationLog.RevealInformation(logbookInformationID);
+        CreatePointerArrow();
+        Destroy(gameObject);
+    }
+
+    protected void CreatePointerArrow()
+    {
+        if (!locationReveal) return;
+
+        PointerArrow pointerArrow = Instantiate(pointerArrowPrefab, transform.position, Quaternion.identity);
+        pointerArrow.Init(locationReveal.position);
     }
 }
