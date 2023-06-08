@@ -37,7 +37,7 @@ public class TripleAttack_Gallant : Attack_Gallant
                 ShootOrb();
                 break;
             case 3:
-                StopAllCoroutines();
+                StopCoroutine(turning);
                 ShootOrb();
                 break;
         }

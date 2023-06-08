@@ -17,7 +17,7 @@ public class RoamAttack_Gallant : Attack_Gallant
         Vector3 direction = (targetT.position - transform.position).normalized;
         Vector3 crossPro = Vector3.Cross(direction, Vector3.up);
 
-        Vector3 position = targetT.position + (Random.Range(-6, 6) * crossPro) + (Random.Range(2, 8) * direction);
+        Vector3 position = targetT.position + ((Random.Range(-6, 6) + 2) * crossPro) + (Random.Range(2, 8) * direction);
 
         NavMeshHit hit;
         NavMesh.SamplePosition(position, out hit, 5f, ~0);
