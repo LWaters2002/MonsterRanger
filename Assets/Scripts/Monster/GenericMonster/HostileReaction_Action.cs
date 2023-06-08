@@ -22,6 +22,18 @@ namespace UtilActions
 
             if (!playerCharacter) Complete();
 
+            if (entity is Gallant_Entity gEntity)
+            {
+                gEntity.FirstEncounter(NextStep);
+                return;
+            }
+
+            NextStep();
+
+        }
+
+        private void NextStep()
+        {
             entity.agent.isStopped = true;
 
             entity.blackboard.Target = playerCharacter.gameObject;
@@ -43,7 +55,7 @@ namespace UtilActions
         public override void Complete()
         {
             entity.agent.isStopped = true;
-            
+
             base.Complete();
         }
     }

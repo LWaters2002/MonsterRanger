@@ -18,7 +18,7 @@ public class PointerArrow : MonoBehaviour
 
         while (t < 1)
         {
-            transform.position += Vector3.up * Time.deltaTime * .25f;
+            transform.position += Vector3.up * .5f * Time.deltaTime * .25f;
             t += Time.deltaTime;
             yield return null;
         }

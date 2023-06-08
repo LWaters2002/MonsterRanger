@@ -11,6 +11,11 @@ public class FireflyProjectile : MonoBehaviour
     [SerializeField]
     private float _spreadForce;
 
+    [SerializeField]
+    private AnimationCurve _speedRamp;
+    [SerializeField]
+    private float _rampUpLength;
+
     [Header("References")]
     public PopupText popupTextPrefab;
     public ParticleSystem[] particleSystems;
@@ -65,6 +70,7 @@ public class FireflyProjectile : MonoBehaviour
     IEnumerator Travel()
     {
         Vector2 randDirection = Random.insideUnitCircle.normalized * Random.Range(.7f, 1.1f);
+        randDirection.y = Mathf.Abs(randDirection.y);
 
         Vector3 spreadDirection = (transform.right * randDirection.x + transform.up * randDirection.y).normalized;
         _rigidbody.AddForce(spreadDirection * _spreadForce, ForceMode.VelocityChange);
@@ -84,9 +90,10 @@ public class FireflyProjectile : MonoBehaviour
 
         t = 0;
 
-        while (t < 0.5f)
+        while (t < _rampUpLength)
         {
-            _speed = Mathf.Lerp(minSpeed, targetSpeed, t / .5f);
+            float eval = _speedRamp.Evaluate(t / _rampUpLength);
+            _speed = Mathf.Lerp(minSpeed, targetSpeed, eval);
             t += Time.deltaTime;
             yield return null;
         }
@@ -114,13 +121,16 @@ public class FireflyProjectile : MonoBehaviour
 
         IHealable healable = other.GetComponentInParent<IHealable>();
 
-        if (other.gameObject.layer == 6) { Destroy(gameObject); }
+        if (other.gameObject.layer == 6)
+        {
+            OnHit?.Invoke();
+            _hasHit = true;
+        }
 
         if (healable != null)
         {
             healable.Heal(_healInfo);
             SpawnPopupText();
-
             OnHit?.Invoke();
 
             _hasHit = true;

@@ -13,12 +13,14 @@ GameObject:
   - component: {fileID: 3322310207160761570}
   - component: {fileID: 1643114824854806023}
   - component: {fileID: 4744788740452475514}
-  m_Layer: 0
+  - component: {fileID: 5360489183937245092}
+  - component: {fileID: 2649199932414700649}
+  m_Layer: 11
   m_Name: TFF_Pine_Tree_05C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3322310207158992386
 Transform:
@@ -123,11 +125,44 @@ LODGroup:
     renderers:
     - renderer: {fileID: 2643348169941711429}
   m_Enabled: 1
+--- !u!114 &5360489183937245092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3322310207158755874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
+--- !u!114 &2649199932414700649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3322310207158755874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e95dc5ff2b64380880dd7ac5922847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 4, y: 3, z: 4}
+  m_Center: {x: 0, y: 1, z: 0}
+  m_Area: 1
+  m_AffectedAgents: ffffffff
 --- !u!1001 &2643348169943867941
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 3322310207158992386}
     m_Modifications:
     - target: {fileID: 100000, guid: 2f05a2c59067c4343b46f9e4db8e4c12, type: 3}
@@ -135,8 +170,16 @@ PrefabInstance:
       value: TFF_Pine_Tree_05C_LOD_1
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 2f05a2c59067c4343b46f9e4db8e4c12, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 2f05a2c59067c4343b46f9e4db8e4c12, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 2f05a2c59067c4343b46f9e4db8e4c12, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 2f05a2c59067c4343b46f9e4db8e4c12, type: 3}
       propertyPath: m_RootOrder
@@ -183,14 +226,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f05a2c59067c4343b46f9e4db8e4c12, type: 3}
 --- !u!23 &2643348169941711429 stripped
 MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2300000, guid: 2f05a2c59067c4343b46f9e4db8e4c12, type: 3}
+  m_CorrespondingSourceObject: {fileID: 2300000, guid: 2f05a2c59067c4343b46f9e4db8e4c12,
+    type: 3}
   m_PrefabInstance: {fileID: 2643348169943867941}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &2643348169943480485 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 400000, guid: 2f05a2c59067c4343b46f9e4db8e4c12, type: 3}
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 2f05a2c59067c4343b46f9e4db8e4c12,
+    type: 3}
   m_PrefabInstance: {fileID: 2643348169943867941}
   m_PrefabAsset: {fileID: 0}

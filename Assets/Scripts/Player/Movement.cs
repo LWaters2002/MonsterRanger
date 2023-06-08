@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
-using System;
+
+using Cinemachine;
+
 
 public class Movement : MonoBehaviour
 {
     [Header("Required")]
     public LayerMask groundMask;
     public Transform groundCheck;
+    public CinemachineVirtualCamera virtualCamera;
 
     [Header("Jump")]
     public float jumpForce;
@@ -43,10 +46,9 @@ public class Movement : MonoBehaviour
     public LayerMask climbMask;
     public Transform climbAnchor;
 
-
-    [Header("Climb Jump")]
-    public float climbJumpForce;
-    public UnityEvent onClimbJump;
+    [Header("Wall Jump")]
+    public float wallJumpForce;
+    public UnityEvent OnWallJump;
 
     private PlayerCharacter _player;
     private Vector2 _moveIn;
@@ -75,9 +77,13 @@ public class Movement : MonoBehaviour
     private float _velocityMagnitude;
 
     private System.Action<Movestate> OnStateChange;
-    public System.Action<float> OnDash; //Cooldown
+    public System.Action<float> OnDash;
+    public System.Action<bool> OnSprint;
+    public System.Action OnJump;
+
 
     private Stat _externalMultiplier;
+    private CinemachineBasicMultiChannelPerlin _virtualNoise;
 
     //private settings
     public void Init(PlayerCharacter player)
@@ -86,8 +92,11 @@ public class Movement : MonoBehaviour
         ChangeMoveState(Movestate.grounded);
 
         player.healingTool.OnCharge += movementMultiplier;
+        GameManager.Get().OnCutsceneChange += _ => _moveIn = Vector2.zero;
 
         _externalMultiplier = new Stat(1.0f);
+
+        _virtualNoise = virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }
 
     private void movementMultiplier(bool start)
@@ -133,6 +142,7 @@ public class Movement : MonoBehaviour
     private void StopSprint(InputAction.CallbackContext obj)
     {
         _isSprinting = false;
+        OnSprint?.Invoke(false);
     }
 
     private void Dash(InputAction.CallbackContext ctx)
@@ -149,6 +159,9 @@ public class Movement : MonoBehaviour
             _dashTimer = 0;
 
             Vector3 moveDirection = _moveIn.y * transform.forward + _moveIn.x * transform.right;
+
+            if (_moveIn == Vector2.zero) moveDirection = transform.forward;
+
             moveDirection = moveDirection.normalized;
 
             _player.rb.AddForce(moveDirection * dashForce, ForceMode.VelocityChange);
@@ -156,9 +169,9 @@ public class Movement : MonoBehaviour
         }
         else if (interactionType == "HoldInteraction")
         {
+            if (!_isSprinting) OnSprint?.Invoke(true);
             _isSprinting = true;
         }
-
     }
 
     private void FixedUpdate()
@@ -170,12 +183,11 @@ public class Movement : MonoBehaviour
         ApplyGravity();
 
         ApplyMovement();
-
-        CheckWallClimb();
     }
 
     private void Update()
     {
+
         if (_dashTimer < dashCooldown) _dashTimer += Time.deltaTime;
 
         if (!_isSprinting) return;
@@ -191,30 +203,6 @@ public class Movement : MonoBehaviour
         _player.rb.AddForce(Vector3.down * gravity, ForceMode.Acceleration); // Additional Gravity for feel purpose.
     }
 
-    private void CheckWallClimb()
-    {
-        if (movestate == Movestate.grounded) return;
-        if (_wallInactiveTimer > wallInactiveTime) return;
-
-        bool wallCheck = Physics.CheckBox(climbAnchor.position, new Vector3(maxWallDistance, .1f, maxWallDistance), Quaternion.identity, climbMask);
-
-        if (wallCheck)
-        {
-            ChangeMoveState(Movestate.climbing);
-
-            if (_isSprinting)
-            {
-                _wallInactiveTimer = 0f;
-            }
-        }
-
-        if ((wallCheck && !_isSprinting))
-            _wallInactiveTimer += Time.fixedDeltaTime;
-
-        if (_wallInactiveTimer > wallInactiveTime || !wallCheck)
-            ChangeMoveState(Movestate.aerial);
-
-    }
 
     private void ApplyMovement()
     {
@@ -232,7 +220,7 @@ public class Movement : MonoBehaviour
 
     private void GroundCheck()
     {
-        if (Physics.SphereCast(groundCheck.position, .2f, Vector3.down, out RaycastHit hit, 1f, groundMask))
+        if (Physics.SphereCast(groundCheck.position, .1f, Vector3.down, out RaycastHit hit, 1f, groundMask))
         {
             _slopeNormal = hit.normal;
 
@@ -263,6 +251,7 @@ public class Movement : MonoBehaviour
                 _climbTime = 0f;
                 _wallInactiveTimer = 0f;
                 _player.rb.useGravity = true;
+      //          _player.animator?.CrossFade("Landed", .2f, -1);
                 break;
             case (Movestate.aerial):
                 _speed = airSpeed;
@@ -303,14 +292,13 @@ public class Movement : MonoBehaviour
                 jumpDirectionalForce = Vector3.up * jumpForce + jumpDirForce * (transform.forward * _moveIn.y + transform.right * _moveIn.x).normalized;
                 break;
             case Movestate.climbing:
-                jumpDirectionalForce = climbJumpForce * (_player.orientation.forward * _moveIn.y + _player.orientation.right * _moveIn.x).normalized;
-                onClimbJump?.Invoke();
+                jumpDirectionalForce = wallJumpForce * (_player.orientation.forward * _moveIn.y + _player.orientation.right * _moveIn.x).normalized;
+                OnWallJump?.Invoke();
                 break;
         }
-
+        OnJump?.Invoke();
         _player.rb.AddForce(jumpDirectionalForce, ForceMode.VelocityChange);
     }
-
 }
 
 public enum Movestate

@@ -14,10 +14,11 @@ public class AttackComponent : MonoBehaviour
 
     public bool isEnabled;
 
-    private bool _active;
+    [HideInInspector]
+    public bool _active;
 
     public float exhaustAmount;
-    
+
     [Header("Effectiveness")]
     public float minimumRange;
     public float maximumRange;
@@ -31,7 +32,7 @@ public class AttackComponent : MonoBehaviour
     {
         isEnabled = _enabled;
     }
-    
+
     public virtual void Init(Entity entity)
     {
         _entity = entity;
@@ -56,6 +57,12 @@ public class AttackComponent : MonoBehaviour
     {
         _active = false;
         OnAttackComplete?.Invoke();
+    }
+
+    public virtual void StopAttack()
+    {
+        StopAllCoroutines();
+        _active = false;
     }
 
     public virtual void Attack(int attackStep)

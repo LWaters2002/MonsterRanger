@@ -9,7 +9,10 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: TFF_Water_01A 1
   m_Shader: {fileID: 4800000, guid: 21b2f218fa38d334daf2f2012e6c546d, type: 3}
-  m_ValidKeywords: []
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _WAVES_ON
   m_InvalidKeywords:
   - _LIGHTS_ON
   - _MAINFOAMPOWER_ON
@@ -20,6 +23,7 @@ Material:
   m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -67,15 +71,15 @@ Material:
     - _ReflectionsScale: 18.3
     - _ReflectionsScrollSpeed: -0.2
     - _ShallowColorDepth: 4.86
-    - _WaveAmplitude: 0
-    - _WaveIntensity: 0
+    - _WaveAmplitude: 1
+    - _WaveIntensity: 0.444
     - _WaveSpeed: 1
-    - _Waves: 0
+    - _Waves: 1
     - __dirty: 0
     m_Colors:
-    - _DeepColor: {r: 0.3962264, g: 0.2079325, b: 0.12148452, a: 1}
+    - _DeepColor: {r: 0.26432893, g: 0.41509432, b: 0.3978145, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _FoamColor: {r: 0.14150941, g: 0.11414203, b: 0.116034456, a: 1}
     - _FresnelColor: {r: 0.6981132, g: 0.60468876, b: 0.5433428, a: 1}
-    - _ShallowColor: {r: 0.24705882, g: 0.17506082, b: 0.14117648, a: 1}
+    - _ShallowColor: {r: 0.36862746, g: 0.47936973, b: 0.50980395, a: 1}
   m_BuildTextureStacks: []

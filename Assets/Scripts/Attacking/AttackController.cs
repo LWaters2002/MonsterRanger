@@ -55,13 +55,14 @@ public class AttackController : MonoBehaviour
     {
         foreach (AttackComponent attack in _attacks)
         {
-            attack.enabled = isEnabled;
+            attack.StopAttack();
         }
     }
 
     public void ChooseAttack()
     {
-
+        if (!this.enabled) return;
+        if (!_entity.canAttack) return;
         if (CheckExhaust()) return;
 
         AttackComponent idealAttack = null;
@@ -74,7 +75,6 @@ public class AttackController : MonoBehaviour
             if (!attack.isEnabled) continue;
 
             float effectiveness = attack.CalculateEffectiveness();
-            // Debug.Log("Score : " + effectiveness + " - " + attack.attackName);
 
             if (effectiveness == 0.0f) continue;
 
@@ -88,7 +88,8 @@ public class AttackController : MonoBehaviour
         }
 
         int count = effectiveAttacks.Count;
-        if (count == 0) return;
+        int randomR = Random.Range(0, _attacks.Length);
+        if (count == 0) { SetAttack(_attacks[randomR]); return; }
 
         int random = Random.Range(0, count);
 
@@ -124,6 +125,9 @@ public class AttackController : MonoBehaviour
 
     public void Attack(int attackStep)
     {
+        if (!_attack) return;
+        if (!_attack._active) return;
+
         _attack?.Attack(attackStep);
     }
 }

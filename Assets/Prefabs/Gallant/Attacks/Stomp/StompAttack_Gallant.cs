@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class StompAttack_Gallant : Attack_Gallant
 {
     public EnemyProjectile projectilePrefab;
+
     public int projectileCount;
     public float radius;
     public float projectileDamage;
+
     public AudioSource launchSound;
+
+    public UnityEvent OnStompLand;
 
     private List<EnemyProjectile> _projectiles;
 
@@ -27,6 +32,21 @@ public class StompAttack_Gallant : Attack_Gallant
             case 2:
                 StartCoroutine(ShootAtPlayer());
                 break;
+            case 3: //Stomp Landed
+                OnStompLand?.Invoke();
+                break;
+        }
+    }
+
+    public override void StopAttack()
+    {
+        base.StopAttack();
+
+        if (_projectiles == null) return;
+
+        foreach (EnemyProjectile projectile in _projectiles)
+        {
+            Destroy(projectile);
         }
     }
 

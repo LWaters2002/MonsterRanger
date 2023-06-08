@@ -6,11 +6,12 @@ public class KillCollider : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
-        PlayerCharacter player = GetComponentInParent<PlayerCharacter>();
 
-        if (player)
+        PlayerCharacter pc = other.GetComponentInParent<PlayerCharacter>();
+
+        if (pc)
         {
-            player.Death();
+            pc.Death();
         }
     }
 }

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a96e189e5f8bdb64484301fe469bb03d, type: 3}
+  m_Name: RoamAround_A
+  m_EditorClassIdentifier: 
+  score: 0
+  scoreMultiplier: 1
+  baseScore: 0.5
+  type: 0
+  deadThreshold: 0.3
+  liveThreshold: 0
+  factors:
+  - {fileID: 11400000, guid: 97ad63c9e879756428de7fdb0f9811d4, type: 2}
+  layer:
+    serializedVersion: 2
+    m_Bits: 2147483647
+  roamRange: 20

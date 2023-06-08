@@ -13,12 +13,13 @@ GameObject:
   - component: {fileID: 2119146855740575444}
   - component: {fileID: 8230249367970980347}
   - component: {fileID: 1401545591270951801}
-  m_Layer: 0
+  - component: {fileID: -3940909928578627745}
+  m_Layer: 11
   m_Name: TFF_Pine_Tree_02C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2119146855742344244
 Transform:
@@ -123,11 +124,28 @@ LODGroup:
     renderers:
     - renderer: {fileID: 1288998498981362992}
   m_Enabled: 1
+--- !u!208 &-3940909928578627745
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2119146855742771220}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 3.19, y: 10.375001, z: 3.43}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.059000004, y: 8.395, z: -0.40600002}
+  m_TimeToStationary: 0.5
 --- !u!1001 &1288998498983257424
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 2119146855742344244}
     m_Modifications:
     - target: {fileID: 100000, guid: b772c900cf750094dba246a888a8146e, type: 3}
@@ -135,8 +153,16 @@ PrefabInstance:
       value: TFF_Pine_Tree_02C_LOD_1
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: b772c900cf750094dba246a888a8146e, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: b772c900cf750094dba246a888a8146e, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: b772c900cf750094dba246a888a8146e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b772c900cf750094dba246a888a8146e, type: 3}
       propertyPath: m_RootOrder
@@ -183,14 +209,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: b772c900cf750094dba246a888a8146e, type: 3}
 --- !u!23 &1288998498981362992 stripped
 MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2300000, guid: b772c900cf750094dba246a888a8146e, type: 3}
+  m_CorrespondingSourceObject: {fileID: 2300000, guid: b772c900cf750094dba246a888a8146e,
+    type: 3}
   m_PrefabInstance: {fileID: 1288998498983257424}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1288998498983657424 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 400000, guid: b772c900cf750094dba246a888a8146e, type: 3}
+  m_CorrespondingSourceObject: {fileID: 400000, guid: b772c900cf750094dba246a888a8146e,
+    type: 3}
   m_PrefabInstance: {fileID: 1288998498983257424}
   m_PrefabAsset: {fileID: 0}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class HealHelper
 {
-    public static Color[] InfusionLookup = { Color.red };
+    public static Color[] InfusionLookup = { Color.green };
 }
 
 //Healing

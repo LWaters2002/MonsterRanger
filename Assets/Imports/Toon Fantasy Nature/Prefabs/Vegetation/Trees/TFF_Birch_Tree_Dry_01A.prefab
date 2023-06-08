@@ -13,12 +13,13 @@ GameObject:
   - component: {fileID: 8179961744560652122}
   - component: {fileID: 4382544407015309583}
   - component: {fileID: 8441953703535392725}
-  m_Layer: 0
+  - component: {fileID: 5703888769654194793}
+  m_Layer: 11
   m_Name: TFF_Birch_Tree_Dry_01A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &8179961744563076538
 Transform:
@@ -129,11 +130,28 @@ LODGroup:
     renderers:
     - renderer: {fileID: 4608427084316027832}
   m_Enabled: 1
+--- !u!208 &5703888769654194793
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8179961744562643354}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 3.081, y: 5.1660004, z: 2.8720002}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.044000003, y: 4.978, z: -0.298}
+  m_TimeToStationary: 0.5
 --- !u!1001 &4608427084313867224
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 8179961744563076538}
     m_Modifications:
     - target: {fileID: 100000, guid: c98430d83d6b16b47ba3c83d6af6d842, type: 3}
@@ -141,8 +159,16 @@ PrefabInstance:
       value: TFF_Birch_Tree_Dry_01A_LOD_2
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: c98430d83d6b16b47ba3c83d6af6d842, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: c98430d83d6b16b47ba3c83d6af6d842, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: c98430d83d6b16b47ba3c83d6af6d842, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c98430d83d6b16b47ba3c83d6af6d842, type: 3}
       propertyPath: m_RootOrder
@@ -189,15 +215,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: c98430d83d6b16b47ba3c83d6af6d842, type: 3}
 --- !u!4 &4608427084314257752 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 400000, guid: c98430d83d6b16b47ba3c83d6af6d842, type: 3}
+  m_CorrespondingSourceObject: {fileID: 400000, guid: c98430d83d6b16b47ba3c83d6af6d842,
+    type: 3}
   m_PrefabInstance: {fileID: 4608427084313867224}
   m_PrefabAsset: {fileID: 0}
 --- !u!23 &4608427084316027832 stripped
 MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2300000, guid: c98430d83d6b16b47ba3c83d6af6d842, type: 3}
+  m_CorrespondingSourceObject: {fileID: 2300000, guid: c98430d83d6b16b47ba3c83d6af6d842,
+    type: 3}
   m_PrefabInstance: {fileID: 4608427084313867224}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6271303893504955460
@@ -205,6 +234,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 8179961744563076538}
     m_Modifications:
     - target: {fileID: 100000, guid: 324635901d2aa494d90bfee441db920c, type: 3}
@@ -212,8 +242,16 @@ PrefabInstance:
       value: TFF_Birch_Tree_Dry_01A_LOD_1
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 324635901d2aa494d90bfee441db920c, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 324635901d2aa494d90bfee441db920c, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 324635901d2aa494d90bfee441db920c, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 324635901d2aa494d90bfee441db920c, type: 3}
       propertyPath: m_RootOrder
@@ -260,14 +298,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 324635901d2aa494d90bfee441db920c, type: 3}
 --- !u!23 &6271303893502659620 stripped
 MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2300000, guid: 324635901d2aa494d90bfee441db920c, type: 3}
+  m_CorrespondingSourceObject: {fileID: 2300000, guid: 324635901d2aa494d90bfee441db920c,
+    type: 3}
   m_PrefabInstance: {fileID: 6271303893504955460}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &6271303893505085124 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 400000, guid: 324635901d2aa494d90bfee441db920c, type: 3}
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 324635901d2aa494d90bfee441db920c,
+    type: 3}
   m_PrefabInstance: {fileID: 6271303893504955460}
   m_PrefabAsset: {fileID: 0}

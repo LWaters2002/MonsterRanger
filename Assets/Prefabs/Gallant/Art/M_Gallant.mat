@@ -12,9 +12,7 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
-  m_InvalidKeywords:
-  - _OUTLINE_KEY0
-  - _WAVES1_ON
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -62,7 +60,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureRamp:
-        m_Texture: {fileID: 2800000, guid: c19f7ff6a74893e4fa49b569cd1141b5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2657d6de5a2ab434f92dad95059da837, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TextureRamp1:
@@ -120,7 +118,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Outline: 0
-    - _OutlineWidth: 0.0001
+    - _OutlineWidth: 0.000033
     - _OutlineWidth1: 0.002
     - _OutlineWidth2: 0.001
     - _Parallax: 0.02

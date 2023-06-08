@@ -172,16 +172,16 @@ MonoBehaviour:
   chargeSound: {fileID: -6865469557747632278}
   range: 100
   staminaCost: 5
-  healAmount: 15
-  FireflyCountRange: {x: 0, y: 5}
-  maxHealMultiplier: 1.5
+  healAmount: 2
+  FireflyCountRange: {x: 1, y: 4}
+  maxHealMultiplier: 1.3
   chargeTime: 3
   minimumChargeTime: 1
   chargeParticles: {fileID: 2586468026907173314}
   chargeParticleScale: 3
   maxEmissionRate: 100
   fullChargeColour: {r: 0.048508406, g: 1, b: 0, a: 1}
-  maxChargeColour: {r: 0, g: 0, b: 0, a: 0}
+  maxChargeColour: {r: 1, g: 0.69682956, b: 0, a: 0}
   impulseSource: {fileID: 2586468025899483079}
   OnFire:
     m_PersistentCalls:

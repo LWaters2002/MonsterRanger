@@ -43,7 +43,6 @@ public class PlayerInteractor : MonoBehaviour
 
             if (interactable != null)
             {
-                Debug.Log("Interact Cast");
                 if (_interactable == interactable) return;
 
                 _interactable = interactable;

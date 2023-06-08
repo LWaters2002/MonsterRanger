@@ -8,7 +8,7 @@ Shader "Toon/TFF_CustomToonOutline"
 		[HideInInspector] _EmissionColor("Emission Color", Color) = (1,1,1,1)
 		[ASEBegin]_TextureSample("Texture Sample", 2D) = "white" {}
 		_TextureRamp("Texture Ramp", 2D) = "white" {}
-		_OutlineWidth("Outline  Width", Range( 0.0001 , 0.5)) = 0.0065
+		_OutlineWidth("Outline  Width", Range( 0.000033 , 0.5)) = 0.0065
 		[ASEEnd]_OutlineColor("Outline Color", Color) = (0,0,0,0)
 		[HideInInspector] _texcoord( "", 2D ) = "white" {}
 

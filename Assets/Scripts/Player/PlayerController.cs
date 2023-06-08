@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,10 +14,24 @@ public class PlayerController : MonoBehaviour
         controls.Enable();
         Debug.Log("Controls Created : " + controls);
 
-        Invoke("PossessDefaultPawn",.2f);
-        
+        Invoke("PossessDefaultPawn", .2f);
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        GameManager.Get().OnCutsceneChange += CutsceneControls;
+    }
+
+    private void CutsceneControls(bool obj)
+    {
+        if (obj)
+        {
+            controls.Disable();
+        }
+        else
+        {
+            controls.Enable();
+        }
     }
 
     private void PossessDefaultPawn()

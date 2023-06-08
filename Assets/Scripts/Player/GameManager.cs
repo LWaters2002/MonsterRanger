@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class GameManager : MonoBehaviour
 {
@@ -32,7 +33,17 @@ public class GameManager : MonoBehaviour
     public void PlayDialogue(DialogueSequence sequence)
     {
         if (!playerCharacter) return;
-
         playerCharacter.dialogueBox.PlayDialogueSequence(sequence);
     }
+
+    public void PlayCutscene(PlayableDirector director)
+    {
+        if (director)
+        {
+            director.Play();
+            director.stopped += (_) => OnCutsceneChange?.Invoke(false);
+        }
+        OnCutsceneChange?.Invoke(true);
+    }
+
 }

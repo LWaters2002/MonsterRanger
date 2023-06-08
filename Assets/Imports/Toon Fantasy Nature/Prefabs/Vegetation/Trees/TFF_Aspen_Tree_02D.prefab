@@ -14,12 +14,13 @@ GameObject:
   - component: {fileID: 478633597901402886}
   - component: {fileID: 126916229034423722}
   - component: {fileID: 3280995657056614339}
-  m_Layer: 0
+  - component: {fileID: 4049554630034850829}
+  m_Layer: 11
   m_Name: TFF_Aspen_Tree_02D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &338035425019189355
 Transform:
@@ -143,11 +144,28 @@ LODGroup:
     renderers:
     - renderer: {fileID: 4933893353267392868}
   m_Enabled: 1
+--- !u!208 &4049554630034850829
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 338035425019151435}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 3.9450002, y: 9.814, z: 3.9060001}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.65900004, y: 9.241, z: -0.48800004}
+  m_TimeToStationary: 0.5
 --- !u!1001 &601728082713823122
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 338035425019189355}
     m_Modifications:
     - target: {fileID: 100000, guid: 6a3afa534d68b714da60ce56a3e07149, type: 3}
@@ -155,8 +173,16 @@ PrefabInstance:
       value: TFF_Aspen_Tree_02D_LOD_1
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 6a3afa534d68b714da60ce56a3e07149, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6a3afa534d68b714da60ce56a3e07149, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6a3afa534d68b714da60ce56a3e07149, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 6a3afa534d68b714da60ce56a3e07149, type: 3}
       propertyPath: m_RootOrder
@@ -203,15 +229,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a3afa534d68b714da60ce56a3e07149, type: 3}
 --- !u!4 &601728082714221842 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 400000, guid: 6a3afa534d68b714da60ce56a3e07149, type: 3}
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 6a3afa534d68b714da60ce56a3e07149,
+    type: 3}
   m_PrefabInstance: {fileID: 601728082713823122}
   m_PrefabAsset: {fileID: 0}
 --- !u!23 &601728082716123122 stripped
 MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2300000, guid: 6a3afa534d68b714da60ce56a3e07149, type: 3}
+  m_CorrespondingSourceObject: {fileID: 2300000, guid: 6a3afa534d68b714da60ce56a3e07149,
+    type: 3}
   m_PrefabInstance: {fileID: 601728082713823122}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4933893353265359108
@@ -219,6 +248,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 338035425019189355}
     m_Modifications:
     - target: {fileID: 100000, guid: 94c690f1133229443b253fbcf68d9c75, type: 3}
@@ -226,8 +256,16 @@ PrefabInstance:
       value: TFF_Aspen_Tree_02D_LOD_2
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 94c690f1133229443b253fbcf68d9c75, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 94c690f1133229443b253fbcf68d9c75, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 94c690f1133229443b253fbcf68d9c75, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 94c690f1133229443b253fbcf68d9c75, type: 3}
       propertyPath: m_RootOrder
@@ -274,14 +312,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 94c690f1133229443b253fbcf68d9c75, type: 3}
 --- !u!4 &4933893353265492868 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 400000, guid: 94c690f1133229443b253fbcf68d9c75, type: 3}
+  m_CorrespondingSourceObject: {fileID: 400000, guid: 94c690f1133229443b253fbcf68d9c75,
+    type: 3}
   m_PrefabInstance: {fileID: 4933893353265359108}
   m_PrefabAsset: {fileID: 0}
 --- !u!23 &4933893353267392868 stripped
 MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 2300000, guid: 94c690f1133229443b253fbcf68d9c75, type: 3}
+  m_CorrespondingSourceObject: {fileID: 2300000, guid: 94c690f1133229443b253fbcf68d9c75,
+    type: 3}
   m_PrefabInstance: {fileID: 4933893353265359108}
   m_PrefabAsset: {fileID: 0}

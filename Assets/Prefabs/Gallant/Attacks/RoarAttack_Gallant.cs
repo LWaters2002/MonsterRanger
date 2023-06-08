@@ -44,6 +44,13 @@ public class RoarAttack_Gallant : Attack_Gallant
         _entity.agent.isStopped = true;
     }
 
+    public override void StopAttack()
+    {
+        base.StopAttack();
+        roar.SetActive(false);
+        aura.SetActive(false);
+    }
+
     public override void Attack(int attackStep)
     {
         base.Attack(attackStep);

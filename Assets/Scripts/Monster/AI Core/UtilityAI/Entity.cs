@@ -21,6 +21,9 @@ public class Entity : MonoBehaviour, IDetectable
 
     public float maxAgentSpeed = 6f;
 
+    [HideInInspector]
+    public bool canAttack = true;
+
     protected virtual void Start()
     {
         animator = GetComponent<Animator>();
@@ -44,29 +47,55 @@ public class Entity : MonoBehaviour, IDetectable
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * speed);
     }
 
-    public IEnumerator WalkToTarget(System.Action callback, float walkTime, float walkPercent, float speed)
+    public IEnumerator WalkToTarget(System.Action callback, float walkTime, float acceptanceProximity, float speed)
     {
-        Vector3 location = Vector3.Lerp(transform.position, blackboard.Target.transform.position, walkPercent);
 
         agent.speed = speed;
 
-        agent.SetDestination(location);
         agent.isStopped = false;
 
         animator.SetBool("isMoving", true);
 
         float t = 0;
 
-        while (Vector3.Distance(transform.position, location) > .2f && t < walkTime)
+        while (Vector3.Distance(transform.position, blackboard.Target.transform.position) > acceptanceProximity && t < walkTime)
         {
+            agent.SetDestination(blackboard.Target.transform.position);
             t += Time.deltaTime;
             yield return null;
         }
 
+        animator.SetBool("isMoving", false);
+        agent.isStopped = true;
+
         callback?.Invoke();
+
+    }
+
+    public IEnumerator WalkToPosition(System.Action callback, Vector3 position, float acceptanceProximity, float speed, float maxWalkTime = 0f)
+    {
+        agent.speed = speed;
+
+        agent.isStopped = false;
+
+        animator.SetBool("isMoving", true);
+
+        agent.SetDestination(position);
+
+        float t = 0;
+
+        while (Vector3.Distance(transform.position, position) > acceptanceProximity)
+        {
+            t += Time.deltaTime;
+            if (t > maxWalkTime) break;
+
+            yield return null;
+        }
 
         animator.SetBool("isMoving", false);
         agent.isStopped = true;
+
+        callback?.Invoke();
     }
 }
 

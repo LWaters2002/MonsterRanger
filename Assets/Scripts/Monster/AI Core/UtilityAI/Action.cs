@@ -83,18 +83,37 @@ public class Timer
     private float _time = 0;
     private float _length;
 
-    public Timer(float length)
+    private System.Action _callback;
+    private bool _timerComplete = false;
+    private bool _looping = false;
+
+    public Timer(float length, bool looping = false, System.Action callback = null)
     {
         _length = length;
+        _callback = callback;
+        _looping = looping;
     }
 
     public void Tick(float deltaTime)
     {
+        if (_timerComplete) return;
+
         _time += Time.deltaTime;
 
         if (_time > _length)
         {
+            _timerComplete = true;
+
             TimerComplete?.Invoke();
+            _callback?.Invoke();
+
+            if (_looping)
+            {
+                _timerComplete = false;
+                _time = 0.0f;
+            }
         }
     }
+
+    public void Stop() { _timerComplete = true; }
 }

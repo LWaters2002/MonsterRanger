@@ -14,10 +14,12 @@ public class TailSwipe_Attack : Attack_Gallant
 
     public float maxWalkTime = 1f;
     public float speed = 5;
+    public float acceptanceRadius;
+
 
     public override void StartAttack()
     {
-        StartCoroutine(_entity.WalkToTarget(base.StartAttack, maxWalkTime, .8f, speed));
+        StartCoroutine(_entity.WalkToTarget(base.StartAttack, maxWalkTime, acceptanceRadius, speed));
     }
 
     public override void Attack(int attackStep)

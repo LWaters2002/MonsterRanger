@@ -69,8 +69,8 @@ MonoBehaviour:
   m_text: Place holder text, lorem impsum some junk, damn you can really write a
     lot
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f53a69393c5667643b6dac64a06a026f, type: 2}
-  m_sharedMaterial: {fileID: 7851304117674127768, guid: f53a69393c5667643b6dac64a06a026f,
+  m_fontAsset: {fileID: 11400000, guid: 95b50559150fade4294e3d6eba78f401, type: 2}
+  m_sharedMaterial: {fileID: -1575172600319366667, guid: 95b50559150fade4294e3d6eba78f401,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}

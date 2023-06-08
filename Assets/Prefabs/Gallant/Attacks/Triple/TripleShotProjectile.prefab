@@ -4895,7 +4895,7 @@ MonoBehaviour:
   OnHit:
     m_PersistentCalls:
       m_Calls: []
-  damage: 60
+  damage: 15
 --- !u!135 &5398492488563367157
 SphereCollider:
   m_ObjectHideFlags: 0

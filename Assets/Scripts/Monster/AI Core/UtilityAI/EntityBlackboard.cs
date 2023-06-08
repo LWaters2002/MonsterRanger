@@ -8,6 +8,8 @@ namespace UtilAI
     public class EntityBlackboard : Blackboard
     {
 
+        public Transform RoamArea;
+        
         [Header("Survival Stats")]
         private SensorManager _sensorManager;
 

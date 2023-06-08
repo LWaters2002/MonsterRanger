@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using DG.Tweening;
 
 public class HealingTool : MonoBehaviour
 {
@@ -92,7 +93,7 @@ public class HealingTool : MonoBehaviour
             ScaleParticlesToCharge(percent);
             AdjustChargeEffectVolume(percent);
 
-            impulseSource.m_ImpulseDefinition.m_AmplitudeGain = 0.12f * percent;
+            impulseSource.m_ImpulseDefinition.m_AmplitudeGain = 0.24f * percent;
 
             bool isStamina = Player.stats.ConsumeStamina(staminaCost * Time.deltaTime);
 
@@ -154,32 +155,27 @@ public class HealingTool : MonoBehaviour
 
     public void HealCast(float percent)
     {
+
         if (!Player) return;
 
         FinishCharge();
         OnFire?.Invoke();
 
+        HealInfo tempInfo;
+        tempInfo.amount = Mathf.Round(healAmount * percent) * ((_isMaxCharge) ? maxHealMultiplier : 1f);
+        tempInfo.infusion = E_Infusion.None;
+
         if (Physics.Raycast(Player.orientation.position, Player.orientation.forward, out RaycastHit hit, range, mask))
         {
-            HealInfo tempInfo;
-            tempInfo.amount = Mathf.Round(healAmount * percent) * ((_isMaxCharge) ? maxHealMultiplier : 1f);
-            tempInfo.infusion = E_Infusion.None;
-
             Transform target = SpawnTarget(hit);
             StartCoroutine(SpawnFireflyProjectiles(percent, target, tempInfo));
         }
-    }
-
-    private Transform SpawnTarget(RaycastHit hit)
-    {
-        GameObject target = new GameObject("Particle Target");
-        target.transform.position = hit.point;
-        target.transform.parent = hit.collider.gameObject.transform;
-
-        Lifetime lifetime = target.AddComponent<Lifetime>();
-        lifetime.SetLifetime(10.0f);
-
-        return target.transform;
+        else
+        {
+            Vector3 targetLocation = Player.orientation.position + Player.orientation.forward * range;
+            Transform target = SpawnTarget(targetLocation);
+            StartCoroutine(SpawnFireflyProjectiles(percent, target, tempInfo));
+        }
     }
 
     private IEnumerator SpawnFireflyProjectiles(float percent, Transform target, HealInfo healInfo)
@@ -197,13 +193,34 @@ public class HealingTool : MonoBehaviour
 
     private void FinishCharge()
     {
-        impulseSource.m_ImpulseDefinition.m_AmplitudeGain = 0.0f;
+        DOTween.To(() => impulseSource.m_ImpulseDefinition.m_AmplitudeGain, x => impulseSource.m_ImpulseDefinition.m_AmplitudeGain = x, 0, .8f);
 
         _isCharging = false;
         chargeParticles.Stop();
-        chargeSound.Stop();
-
+        chargeSound.DOFade(0f, .8f);
         OnCharge?.Invoke(false);
+    }
+
+    private Transform SpawnTarget(Vector3 targetPosition)
+    {
+        GameObject target = new GameObject("Particle Target");
+        target.transform.position = targetPosition;
+
+        Lifetime lifetime = target.AddComponent<Lifetime>();
+        lifetime.SetLifetime(10.0f);
+
+        return target.transform;
+    }
+    private Transform SpawnTarget(RaycastHit hit)
+    {
+        GameObject target = new GameObject("Particle Target");
+        target.transform.position = hit.point;
+        target.transform.parent = hit.collider.gameObject.transform;
+
+        Lifetime lifetime = target.AddComponent<Lifetime>();
+        lifetime.SetLifetime(10.0f);
+
+        return target.transform;
     }
 
 }

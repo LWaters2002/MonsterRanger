@@ -22,8 +22,8 @@ public class PlayerStats
 
     public System.Action OnDeath;
 
-    private float _staminaBreak = .2f;
-    private float _staminaRegenRate = 25f;
+    private float _staminaBreak = .75f;
+    private float _staminaRegenRate = 60f;
 
     private Coroutine _regenCoroutine;
 

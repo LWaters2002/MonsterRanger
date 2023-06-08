@@ -1,7 +1,7 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
+using DG.Tweening;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Movement))]
@@ -17,6 +17,8 @@ public class PlayerCharacter : Pawn, IDamagable, IDetectable
 
     [field: SerializeField]
     public HealingTool healingTool { get; private set; }
+
+    public CinemachineVirtualCamera cmVcam;
 
     public MonoBehaviour mono => this;
 
@@ -42,6 +44,10 @@ public class PlayerCharacter : Pawn, IDamagable, IDetectable
 
     private Vector2 mouseRotationVector = Vector2.zero;
 
+    [Header("Cheeky Last Minute Additons")]
+    public CinemachineVirtualCamera endCamera;
+    public GameObject endUI;
+
     private void Awake()
     {
         //Initialising and Component Getting
@@ -53,20 +59,59 @@ public class PlayerCharacter : Pawn, IDamagable, IDetectable
         stats = new PlayerStats(this, 100, 100, 100);
         stats.OnDeath += Death;
         movement.OnDash += PlayDashAnimation;
+        movement.OnSprint += OnSprint;
+        movement.OnJump += () => animator.SetTrigger("Jump");
+
 
         InitChain();
     }
 
+    private void OnSprint(bool isSprint)
+    {
+        if (isSprint)
+        {
+            DOTween.To(() => cmVcam.m_Lens.FieldOfView, x => cmVcam.m_Lens.FieldOfView = x, 90f, 1f).SetEase(Ease.OutSine);
+        }
+        else
+        {
+            DOTween.To(() => cmVcam.m_Lens.FieldOfView, x => cmVcam.m_Lens.FieldOfView = x, 80f, 1f).SetEase(Ease.OutSine);
+        }
+    }
+
     public void Death()
     {
-        rb.MovePosition(spawnTransform.position);
-        stats.AlterHealth(100);
-        stats.AlterStamina(100);
+        // rb.MovePosition(spawnTransform.position);
+        // stats.AlterHealth(100);
+        // stats.AlterStamina(100);
+
+        endCamera.Priority = 1000;
+        endUI.SetActive(true);
+        GameManager.Get().PlayCutscene(null);
+
+        Invoke("RestartGame", 7f);
     }
+
+    private void RestartGame()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("SC_World");
+    }
+
 
     private void PlayDashAnimation(float obj)
     {
-        animator.CrossFade("Dash", .1f);
+        animator.CrossFade("Dash", .1f, -1);
+        Sequence sequence = DOTween.Sequence();
+
+        sequence.Append(
+        DOTween.To(() => cmVcam.m_Lens.FieldOfView, x => cmVcam.m_Lens.FieldOfView = x, 85f, .4f).SetEase(Ease.OutSine)
+        );
+
+        sequence.Append(
+        DOTween.To(() => cmVcam.m_Lens.FieldOfView, x => cmVcam.m_Lens.FieldOfView = x, 80f, .4f).SetEase(Ease.OutSine)
+        );
+
+        sequence.Play();
+
     }
 
     private void InitChain()
@@ -91,7 +136,8 @@ public class PlayerCharacter : Pawn, IDamagable, IDetectable
 
     private void Update()
     {
-        animator.SetFloat("Speed", rb.velocity.magnitude);
+        Vector2 lateralVelocity = new Vector2(rb.velocity.x, rb.velocity.z);
+        animator.SetFloat("Speed", lateralVelocity.magnitude);
         animator.SetInteger("Movestate", (int)movement.movestate);
     }
 
