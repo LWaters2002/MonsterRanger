@@ -30,6 +30,7 @@ public class Gallant_Entity : Entity
 
     [Header("Final Segment")]
     public Transform[] teleportPoints;
+    public Cinemachine.CinemachineVirtualCamera vCam;
     public ParticleSystem fireflyFX;
 
     [Header("Dialogue Sequence")]
@@ -133,6 +134,7 @@ public class Gallant_Entity : Entity
         bodyRenderer.material = starMaterial;
         attackController.SetEnabledAllAttacks(false);
         attackController.enabled = false;
+        vCam.Priority = 200;
 
         yield return new WaitForSeconds(2f);
 
@@ -164,6 +166,8 @@ public class Gallant_Entity : Entity
             yield return new WaitForSeconds(2.5f);
         }
 
+        vCam.Priority = -5;
+
         animator.Play("EndExhaust");
 
         playerCharacter.rb.isKinematic = false;
@@ -184,7 +188,7 @@ public class Gallant_Entity : Entity
 
         yield return new WaitForSeconds(10f);
 
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
     public void LookAtTarget(bool lookAtTarget)
@@ -204,7 +208,7 @@ public class Gallant_Entity : Entity
         attackController.enabled = false;
 
         GameManager.Get().PlayCutscene(firstEncounterCutscene);
-        
+
         double t = firstEncounterCutscene.playableAsset.duration;
 
         yield return new WaitForSeconds((float)t);

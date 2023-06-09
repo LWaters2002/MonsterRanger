@@ -123,6 +123,14 @@ public class AttackController : MonoBehaviour
         return _attack;
     }
 
+    public void SelectAttackCombat(string attackName)
+    {
+        AttackComponent stringAttack = _attacks.Where(x => x.attackName == attackName).First();
+
+        SetAttack(stringAttack);
+    }
+
+
     public void Attack(int attackStep)
     {
         if (!_attack) return;

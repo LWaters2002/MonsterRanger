@@ -133,6 +133,8 @@ public class FireflyProjectile : MonoBehaviour
             SpawnPopupText();
             OnHit?.Invoke();
 
+            FindObjectOfType<PlayerCharacter>()?.stats.AlterHealth(_healInfo.amount / 8);
+
             _hasHit = true;
         }
     }

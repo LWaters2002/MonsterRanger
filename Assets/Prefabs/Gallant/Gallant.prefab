@@ -9990,16 +9990,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isEnabled: 1
+  _active: 0
   exhaustAmount: 10
   minimumRange: 0
   maximumRange: 40
   cooldown: 5
-  weight: 1.4
+  weight: 2
   _hurtbox: {fileID: 284113537}
   turnSpeed: 5
   turnDuration: 0.4
   maxWalkTime: 1
   speed: 5
+  acceptanceRadius: 0
 --- !u!1 &318825095
 GameObject:
   m_ObjectHideFlags: 0
@@ -14894,6 +14896,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isEnabled: 0
+  _active: 0
   exhaustAmount: 35
   minimumRange: 0
   maximumRange: 75
@@ -39850,6 +39853,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isEnabled: 1
+  _active: 0
   exhaustAmount: 5
   minimumRange: 0
   maximumRange: 50
@@ -40078,6 +40082,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isEnabled: 0
+  _active: 0
   exhaustAmount: 20
   minimumRange: 0
   maximumRange: 25
@@ -51660,20 +51665,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAgentSpeed: 6
+  canAttack: 1
   _HeadLookAtConstraint: {fileID: 0}
+  bodyRenderer: {fileID: 1363777416541861834}
+  skinMaterial: {fileID: 0}
+  flashMaterial: {fileID: 0}
+  starMaterial: {fileID: 2100000, guid: eac77bac22456e64c9973b24bda81f46, type: 2}
+  HealPartFX: {fileID: 0}
   teleportPoints:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  bodyRenderer: {fileID: 1363777416541861834}
-  starMaterial: {fileID: 2100000, guid: eac77bac22456e64c9973b24bda81f46, type: 2}
+  vCam: {fileID: 0}
   fireflyFX: {fileID: 1641695348}
   powerOverflowDialogue: {fileID: 11400000, guid: 475eb7f20d503584092f09a0fd68a572,
     type: 2}
   markingDialogue: {fileID: 11400000, guid: 027909dd7b270e741a5d5afa9e89498d, type: 2}
   goodJobDoneDialogue: {fileID: 11400000, guid: 2f8306e036798e6408b33e6c6f03d668,
     type: 2}
+  firstEncounterCutscene: {fileID: 0}
+  endCutscene: {fileID: 0}
 --- !u!114 &187800828511050251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51686,6 +51698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4f426eb2a6a12d41bd7f87786a815e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RoamArea: {fileID: 0}
   maxTravelDistance: 500
   foodConsumeRange: 10
   foodDecay: 0

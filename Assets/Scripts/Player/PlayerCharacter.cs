@@ -29,6 +29,7 @@ public class PlayerCharacter : Pawn, IDamagable, IDetectable
 
     [Range(0.01f, 2f)]
     [SerializeField] private float sensitivity;
+    [SerializeField] private float sensitivityMultiplier;
     public Transform orientation;
 
     public Transform spawnTransform;
@@ -56,7 +57,7 @@ public class PlayerCharacter : Pawn, IDamagable, IDetectable
         animator = GetComponent<Animator>();
         interactor = GetComponent<PlayerInteractor>();
 
-        stats = new PlayerStats(this, 100, 100, 100);
+        stats = new PlayerStats(this, 150, 150, 100);
         stats.OnDeath += Death;
         movement.OnDash += PlayDashAnimation;
         movement.OnSprint += OnSprint;
@@ -171,7 +172,7 @@ public class PlayerCharacter : Pawn, IDamagable, IDetectable
     {
         mouseDelta = context.ReadValue<Vector2>();
 
-        mouseDelta *= sensitivity;
+        mouseDelta *= sensitivity * sensitivityMultiplier;
         mouseDelta.y = -mouseDelta.y;
 
         mouseRotationVector += mouseDelta;
@@ -179,7 +180,7 @@ public class PlayerCharacter : Pawn, IDamagable, IDetectable
         float yClamped = Mathf.Clamp(mouseRotationVector.y, -60f, 60f);
         mouseRotationVector.y = yClamped;
 
-        rb.MoveRotation(Quaternion.Euler(0, mouseRotationVector.x, 0));
+        rb?.MoveRotation(Quaternion.Euler(0, mouseRotationVector.x, 0));
         orientation.localRotation = Quaternion.Euler(mouseRotationVector.y, 0, 0);
 
     }

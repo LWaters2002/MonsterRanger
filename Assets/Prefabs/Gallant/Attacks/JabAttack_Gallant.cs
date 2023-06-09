@@ -15,16 +15,19 @@ public class JabAttack_Gallant : Attack_Gallant
     public float speed = 8;
     public float acceptanceRadius;
 
+    private bool _turning = false;
+
     public override void StartAttack()
     {
         StartCoroutine(_entity.WalkToTarget(base.StartAttack, maxWalkTime, acceptanceRadius, speed));
+        _turning = true;
     }
 
     public override void Attack(int attackStep)
     {
         base.Attack(attackStep);
 
-        StartCoroutine(FaceTarget());
+        StartCoroutine(Turn());
 
         switch (attackStep)
         {
@@ -32,20 +35,25 @@ public class JabAttack_Gallant : Attack_Gallant
                 _hurtbox.ActivateColliders();
                 break;
             case 1:
+                _turning = false;
                 _hurtbox.DeactivateColliders();
                 break;
         }
     }
 
-    public IEnumerator FaceTarget()
+    public override void StopAttack()
     {
-        float t = 0.0f;
+        base.StopAttack();
+        _turning = false;
+    }
 
-        while (t < turnDuration)
+    private IEnumerator Turn()
+    {
+        while (_turning)
         {
-            t += Time.deltaTime;
             _entity.TurnToTargetTicked(turnSpeed);
             yield return null;
         }
     }
+
 }

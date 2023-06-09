@@ -25,6 +25,9 @@ public class PlayerStats
     private float _staminaBreak = .75f;
     private float _staminaRegenRate = 60f;
 
+    private float _invulnerableTime = .25f;
+    private bool _isInvulnerable = false;
+
     private Coroutine _regenCoroutine;
 
     public PlayerStats(PlayerCharacter player, float health, float stamina, float experience)
@@ -39,13 +42,25 @@ public class PlayerStats
 
     public void AlterHealth(float amount)
     {
-        if (amount < 0) OnDamaged?.Invoke(amount);
+        if (amount < 0)
+        {
+            if (_isInvulnerable) return;
+            OnDamaged?.Invoke(amount);
+            _player.StartCoroutine(TriggerInvulnerability());
+        }
 
         _health += amount;
 
         _health = Mathf.Clamp(_health, 0f, _maxHealth);
         OnHealthChange?.Invoke(_health, _maxHealth);
         if (_health <= 0f) { OnDeath?.Invoke(); }
+    }
+
+    IEnumerator TriggerInvulnerability()
+    {
+        _isInvulnerable = true;
+        yield return new WaitForSeconds(_invulnerableTime);
+        _isInvulnerable = false;
     }
 
     IEnumerator RegenStamina()

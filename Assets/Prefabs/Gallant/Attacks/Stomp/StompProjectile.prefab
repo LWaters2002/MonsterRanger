@@ -9698,7 +9698,10 @@ MonoBehaviour:
     integralGain: 3
     derivativeGain: 4
     integrationSaturation: 1
-  damage: 10
+  OnHit:
+    m_PersistentCalls:
+      m_Calls: []
+  damage: 20
 --- !u!82 &1043195850270404626
 AudioSource:
   m_ObjectHideFlags: 0

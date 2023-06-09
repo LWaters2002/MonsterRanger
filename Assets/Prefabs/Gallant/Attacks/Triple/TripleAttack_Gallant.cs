@@ -39,9 +39,12 @@ public class TripleAttack_Gallant : Attack_Gallant
             case 3:
                 StopCoroutine(turning);
                 ShootOrb();
+                AttackComplete();
                 break;
         }
     }
+
+
 
     private IEnumerator Turn()
     {

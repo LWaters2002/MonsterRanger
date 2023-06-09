@@ -16,6 +16,7 @@ public class StompAttack_Gallant : Attack_Gallant
     public UnityEvent OnStompLand;
 
     private List<EnemyProjectile> _projectiles;
+    private bool _turning = false;
 
     public override void Attack(int attackStep)
     {
@@ -25,8 +26,11 @@ public class StompAttack_Gallant : Attack_Gallant
         {
             case 0:
                 StartCoroutine(GenerateProjectiles());
+                _turning = true;
+                StartCoroutine(Turn());
                 break;
             case 1:
+                _turning = false;
                 ChargeProjectiles();
                 break;
             case 2:
@@ -35,6 +39,16 @@ public class StompAttack_Gallant : Attack_Gallant
             case 3: //Stomp Landed
                 OnStompLand?.Invoke();
                 break;
+        }
+    }
+
+
+    private IEnumerator Turn()
+    {
+        while (_turning)
+        {
+            _entity.TurnToTargetTicked(1f);
+            yield return null;
         }
     }
 
